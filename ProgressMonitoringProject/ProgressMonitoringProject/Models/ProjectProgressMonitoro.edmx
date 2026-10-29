@@ -1,0 +1,2855 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="FypProjectProgDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="ComiteeMeeting">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="meetingDescription" Type="varchar" MaxLength="200" />
+          <Property Name="startDate" Type="date" />
+          <Property Name="endDate" Type="date" />
+          <Property Name="startTime" Type="time" Precision="7" />
+          <Property Name="endTime" Type="time" Precision="7" />
+          <Property Name="venue" Type="varchar" MaxLength="50" />
+          <Property Name="selectedDays" Type="varchar" MaxLength="100" />
+          <Property Name="sessionID" Type="int" />
+          <Property Name="isGraded" Type="bit" />
+          <Property Name="isFileRequired" Type="bit" />
+          <Property Name="title" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Department">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Enrollment">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="studentID" Type="varchar" MaxLength="20" />
+          <Property Name="sessionID" Type="int" />
+          <Property Name="subject" Type="varchar" MaxLength="50" />
+          <Property Name="grade" Type="varchar" MaxLength="5" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'FypProjectProgDB.dbo.Fyp1EvaluationParameters' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Fyp1EvaluationParameters">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="200" />
+          <Property Name="percentage" Type="int" />
+          <Property Name="sessionID" Type="int" />
+          <Property Name="allowEvaluation" Type="bit" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'FypProjectProgDB.dbo.Fyp1ParameterEvaluator' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Fyp1ParameterEvaluator">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="parameterID" Type="int" />
+          <Property Name="evaluatorID" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'FypProjectProgDB.dbo.Fyp1SubParameter' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Fyp1SubParameter">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="parameterID" Type="int" />
+          <Property Name="name" Type="nvarchar" MaxLength="200" />
+          <Property Name="percentage" Type="int" />
+        </EntityType>
+        <EntityType Name="FYP2Score">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="evaluatorID" Type="varchar" MaxLength="20" />
+          <Property Name="evaluationID" Type="int" />
+          <Property Name="sessionID" Type="int" />
+          <Property Name="score" Type="int" />
+          <Property Name="groupMemberID" Type="int" />
+        </EntityType>
+        <EntityType Name="Fyp2Task">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="groupID" Type="int" />
+          <Property Name="sessionID" Type="int" />
+          <Property Name="taskDescription" Type="varchar" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="Fyp2TaskEvaluation">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="taskID" Type="int" />
+          <Property Name="evaluatorID" Type="varchar" MaxLength="20" />
+          <Property Name="studentID" Type="varchar" MaxLength="20" />
+          <Property Name="remarks" Type="varchar" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="GroupMembers">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="groupID" Type="int" />
+          <Property Name="studentID" Type="varchar" MaxLength="20" />
+          <Property Name="isAdmin" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="GroupRequestMembers">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RequestID" Type="int" Nullable="false" />
+          <Property Name="MemberRegNum" Type="varchar" MaxLength="20" />
+          <Property Name="Status" Type="varchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="GroupRequests">
+          <Key>
+            <PropertyRef Name="RequestID" />
+          </Key>
+          <Property Name="RequestID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FromRegNum" Type="varchar" MaxLength="20" />
+          <Property Name="SessionID" Type="int" />
+          <Property Name="RequestDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="GroupSchedule">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="groupID" Type="int" />
+          <Property Name="comiteeMeetingID" Type="int" />
+          <Property Name="filePath" Type="varchar" MaxLength="200" />
+          <Property Name="Status" Type="varchar" MaxLength="20" />
+          <Property Name="estimatedTime" Type="time" Precision="7" />
+          <Property Name="meetingDate" Type="date" />
+          <Property Name="isAttend" Type="int" />
+          <Property Name="type" Type="varchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="MeetingAttendance">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="scheduleID" Type="int" />
+          <Property Name="attendance" Type="bit" />
+          <Property Name="remarks" Type="varchar" MaxLength="200" />
+          <Property Name="studentID" Type="varchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="MeetingQueue">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="meetingDate" Type="date" />
+          <Property Name="meetingTime" Type="time" Precision="7" />
+          <Property Name="status" Type="varchar" MaxLength="20" />
+          <Property Name="scheduleID" Type="int" />
+          <Property Name="sessionID" Type="int" />
+        </EntityType>
+        <EntityType Name="MeetingQueueAttendance">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="meetingQueueID" Type="int" />
+          <Property Name="memberID" Type="int" />
+          <Property Name="isPresent" Type="bit" />
+        </EntityType>
+        <EntityType Name="OfferedProject">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="sessionID" Type="int" />
+          <Property Name="projectID" Type="int" />
+        </EntityType>
+        <EntityType Name="Project">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="title" Type="varchar" MaxLength="50" />
+          <Property Name="suggestedBy" Type="varchar" MaxLength="20" />
+          <Property Name="projectStatus" Type="bit" />
+          <Property Name="objectives" Type="varchar" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="ProjectGroup">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="createdBy" Type="varchar" MaxLength="20" />
+          <Property Name="supervisorID" Type="varchar" MaxLength="20" />
+          <Property Name="projectID" Type="int" />
+          <Property Name="isFinalized" Type="int" Nullable="false" />
+          <Property Name="createdSession" Type="int" />
+        </EntityType>
+        <EntityType Name="RecurringMeetingDays">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="meetingID" Type="int" />
+          <Property Name="meetingDay" Type="varchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="Section">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="20" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'FypProjectProgDB.dbo.SemesterAgenda' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="SemesterAgenda">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="program" Type="nvarchar" MaxLength="20" />
+          <Property Name="title" Type="nvarchar" MaxLength="200" />
+          <Property Name="agendaDate" Type="date" />
+          <Property Name="agendaTime" Type="nvarchar" MaxLength="50" />
+          <Property Name="location" Type="nvarchar" MaxLength="200" />
+          <Property Name="sessionID" Type="int" />
+          <Property Name="createdAt" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Session">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="20" />
+          <Property Name="startDate" Type="date" />
+        </EntityType>
+        <EntityType Name="StudentFypAttempts">
+          <Key>
+            <PropertyRef Name="attemptId" />
+          </Key>
+          <Property Name="attemptId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="studentId" Type="varchar" MaxLength="20" />
+          <Property Name="sessionId" Type="int" />
+          <Property Name="groupId" Type="int" />
+          <Property Name="fypType" Type="tinyint" />
+          <Property Name="status" Type="varchar" MaxLength="20" />
+          <Property Name="createdAt" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Students">
+          <Key>
+            <PropertyRef Name="regNum" />
+          </Key>
+          <Property Name="regNum" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="50" />
+          <Property Name="admissionSession" Type="int" />
+          <Property Name="currentCGPA" Type="float" />
+          <Property Name="gender" Type="char" MaxLength="1" />
+          <Property Name="selectedTech" Type="int" />
+          <Property Name="studentDepartment" Type="int" />
+          <Property Name="studentSection" Type="int" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'FypProjectProgDB.dbo.SupervisorAttendance' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="SupervisorAttendance">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="meetingID" Type="int" />
+          <Property Name="memberID" Type="int" />
+          <Property Name="attendanceDate" Type="date" />
+          <Property Name="isAttend" Type="bit" />
+        </EntityType>
+        <EntityType Name="SuperVisorMeeting">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="date" Type="date" />
+          <Property Name="time" Type="time" Precision="7" />
+          <Property Name="day" Type="varchar" MaxLength="20" />
+          <Property Name="venue" Type="varchar" MaxLength="50" />
+          <Property Name="createdBy" Type="varchar" MaxLength="20" />
+          <Property Name="groupID" Type="int" />
+          <Property Name="isRecurring" Type="bit" />
+          <Property Name="memberId" Type="varchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="SupNotBroadCast">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="studentID" Type="varchar" MaxLength="20" />
+          <Property Name="meetingID" Type="int" />
+          <Property Name="notStatus" Type="bit" />
+        </EntityType>
+        <EntityType Name="SupTaskBroadCast">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="studentID" Type="varchar" MaxLength="20" />
+          <Property Name="taskID" Type="int" />
+          <Property Name="notStatus" Type="bit" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'FypProjectProgDB.dbo.TaskAllocation' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="TaskAllocation">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="groupID" Type="int" />
+          <Property Name="meetingID" Type="int" />
+          <Property Name="taskType" Type="nvarchar" MaxLength="20" />
+          <Property Name="taskDescription" Type="nvarchar(max)" />
+          <Property Name="remarks" Type="nvarchar(max)" />
+          <Property Name="assignedDate" Type="date" />
+          <Property Name="sessionID" Type="int" />
+        </EntityType>
+        <EntityType Name="TaskEvaluation">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="taskID" Type="int" />
+          <Property Name="taskRemarks" Type="varchar" MaxLength="200" />
+          <Property Name="submissionFilePath" Type="varchar" MaxLength="200" />
+          <Property Name="submissionDate" Type="date" />
+        </EntityType>
+        <EntityType Name="Tasks">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="title" Type="varchar" MaxLength="50" />
+          <Property Name="taskDescription" Type="varchar" MaxLength="500" />
+          <Property Name="assignDate" Type="date" />
+          <Property Name="dueDate" Type="date" />
+          <Property Name="assignedBy" Type="varchar" MaxLength="20" />
+          <Property Name="groupID" Type="int" />
+          <Property Name="studentID" Type="varchar" MaxLength="20" />
+          <Property Name="isPptRequired" Type="bit" />
+          <Property Name="taskStatus" Type="varchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="Technology">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="50" />
+          <Property Name="password" Type="varchar" MaxLength="50" />
+          <Property Name="email" Type="varchar" MaxLength="50" />
+          <Property Name="role" Type="varchar" MaxLength="20" />
+        </EntityType>
+        <Association Name="FK__ComiteeMe__sessi__1DB06A4F">
+          <End Role="Session" Type="Self.Session" Multiplicity="0..1" />
+          <End Role="ComiteeMeeting" Type="Self.ComiteeMeeting" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Session">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ComiteeMeeting">
+              <PropertyRef Name="sessionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Enrollmen__sessi__5812160E">
+          <End Role="Session" Type="Self.Session" Multiplicity="0..1" />
+          <End Role="Enrollment" Type="Self.Enrollment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Session">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Enrollment">
+              <PropertyRef Name="sessionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Enrollmen__stude__571DF1D5">
+          <End Role="Students" Type="Self.Students" Multiplicity="0..1" />
+          <End Role="Enrollment" Type="Self.Enrollment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Students">
+              <PropertyRef Name="regNum" />
+            </Principal>
+            <Dependent Role="Enrollment">
+              <PropertyRef Name="studentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__FYP2Score__evalu__7A672E12">
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="FYP2Score" Type="Self.FYP2Score" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="FYP2Score">
+              <PropertyRef Name="evaluatorID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__FYP2Score__evalu__7B5B524B">
+          <End Role="Fyp2TaskEvaluation" Type="Self.Fyp2TaskEvaluation" Multiplicity="0..1" />
+          <End Role="FYP2Score" Type="Self.FYP2Score" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Fyp2TaskEvaluation">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="FYP2Score">
+              <PropertyRef Name="evaluationID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__FYP2Score__group__7D439ABD">
+          <End Role="GroupMembers" Type="Self.GroupMembers" Multiplicity="0..1" />
+          <End Role="FYP2Score" Type="Self.FYP2Score" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GroupMembers">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="FYP2Score">
+              <PropertyRef Name="groupMemberID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__FYP2Score__sessi__7C4F7684">
+          <End Role="Session" Type="Self.Session" Multiplicity="0..1" />
+          <End Role="FYP2Score" Type="Self.FYP2Score" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Session">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="FYP2Score">
+              <PropertyRef Name="sessionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Fyp2Task__sessio__72C60C4A">
+          <End Role="Session" Type="Self.Session" Multiplicity="0..1" />
+          <End Role="Fyp2Task" Type="Self.Fyp2Task" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Session">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Fyp2Task">
+              <PropertyRef Name="sessionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Fyp2TaskE__evalu__76969D2E">
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="Fyp2TaskEvaluation" Type="Self.Fyp2TaskEvaluation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Fyp2TaskEvaluation">
+              <PropertyRef Name="evaluatorID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Fyp2TaskE__stude__778AC167">
+          <End Role="Students" Type="Self.Students" Multiplicity="0..1" />
+          <End Role="Fyp2TaskEvaluation" Type="Self.Fyp2TaskEvaluation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Students">
+              <PropertyRef Name="regNum" />
+            </Principal>
+            <Dependent Role="Fyp2TaskEvaluation">
+              <PropertyRef Name="studentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Fyp2TaskE__taskI__75A278F5">
+          <End Role="Fyp2Task" Type="Self.Fyp2Task" Multiplicity="0..1" />
+          <End Role="Fyp2TaskEvaluation" Type="Self.Fyp2TaskEvaluation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Fyp2Task">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Fyp2TaskEvaluation">
+              <PropertyRef Name="taskID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__GroupMemb__group__66603565">
+          <End Role="ProjectGroup" Type="Self.ProjectGroup" Multiplicity="0..1" />
+          <End Role="GroupMembers" Type="Self.GroupMembers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProjectGroup">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="GroupMembers">
+              <PropertyRef Name="groupID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__GroupMemb__stude__6754599E">
+          <End Role="Students" Type="Self.Students" Multiplicity="0..1" />
+          <End Role="GroupMembers" Type="Self.GroupMembers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Students">
+              <PropertyRef Name="regNum" />
+            </Principal>
+            <Dependent Role="GroupMembers">
+              <PropertyRef Name="studentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__GroupRequ__FromR__4F47C5E3">
+          <End Role="Students" Type="Self.Students" Multiplicity="0..1" />
+          <End Role="GroupRequests" Type="Self.GroupRequests" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Students">
+              <PropertyRef Name="regNum" />
+            </Principal>
+            <Dependent Role="GroupRequests">
+              <PropertyRef Name="FromRegNum" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__GroupRequ__Membe__55009F39">
+          <End Role="Students" Type="Self.Students" Multiplicity="0..1" />
+          <End Role="GroupRequestMembers" Type="Self.GroupRequestMembers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Students">
+              <PropertyRef Name="regNum" />
+            </Principal>
+            <Dependent Role="GroupRequestMembers">
+              <PropertyRef Name="MemberRegNum" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__GroupRequ__Reque__55F4C372">
+          <End Role="GroupRequests" Type="Self.GroupRequests" Multiplicity="1" />
+          <End Role="GroupRequestMembers" Type="Self.GroupRequestMembers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GroupRequests">
+              <PropertyRef Name="RequestID" />
+            </Principal>
+            <Dependent Role="GroupRequestMembers">
+              <PropertyRef Name="RequestID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__GroupRequ__Sessi__503BEA1C">
+          <End Role="Session" Type="Self.Session" Multiplicity="0..1" />
+          <End Role="GroupRequests" Type="Self.GroupRequests" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Session">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="GroupRequests">
+              <PropertyRef Name="SessionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__GroupSche__comit__22751F6C">
+          <End Role="ComiteeMeeting" Type="Self.ComiteeMeeting" Multiplicity="0..1" />
+          <End Role="GroupSchedule" Type="Self.GroupSchedule" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ComiteeMeeting">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="GroupSchedule">
+              <PropertyRef Name="comiteeMeetingID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__MeetingAt__sched__25518C17">
+          <End Role="GroupSchedule" Type="Self.GroupSchedule" Multiplicity="0..1" />
+          <End Role="MeetingAttendance" Type="Self.MeetingAttendance" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GroupSchedule">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="MeetingAttendance">
+              <PropertyRef Name="scheduleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__MeetingQu__meeti__2FCF1A8A">
+          <End Role="MeetingQueue" Type="Self.MeetingQueue" Multiplicity="0..1" />
+          <End Role="MeetingQueueAttendance" Type="Self.MeetingQueueAttendance" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MeetingQueue">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="MeetingQueueAttendance">
+              <PropertyRef Name="meetingQueueID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__MeetingQu__membe__30C33EC3">
+          <End Role="GroupMembers" Type="Self.GroupMembers" Multiplicity="0..1" />
+          <End Role="MeetingQueueAttendance" Type="Self.MeetingQueueAttendance" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GroupMembers">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="MeetingQueueAttendance">
+              <PropertyRef Name="memberID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__MeetingQu__sched__2BFE89A6">
+          <End Role="GroupSchedule" Type="Self.GroupSchedule" Multiplicity="0..1" />
+          <End Role="MeetingQueue" Type="Self.MeetingQueue" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GroupSchedule">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="MeetingQueue">
+              <PropertyRef Name="scheduleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__MeetingQu__sessi__2CF2ADDF">
+          <End Role="Session" Type="Self.Session" Multiplicity="0..1" />
+          <End Role="MeetingQueue" Type="Self.MeetingQueue" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Session">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="MeetingQueue">
+              <PropertyRef Name="sessionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__OfferedPr__proje__5EBF139D">
+          <End Role="Project" Type="Self.Project" Multiplicity="0..1" />
+          <End Role="OfferedProject" Type="Self.OfferedProject" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Project">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="OfferedProject">
+              <PropertyRef Name="projectID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__OfferedPr__sessi__5DCAEF64">
+          <End Role="Session" Type="Self.Session" Multiplicity="0..1" />
+          <End Role="OfferedProject" Type="Self.OfferedProject" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Session">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="OfferedProject">
+              <PropertyRef Name="sessionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Project__suggest__5AEE82B9">
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="Project" Type="Self.Project" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Project">
+              <PropertyRef Name="suggestedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ProjectGr__creat__619B8048">
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="ProjectGroup" Type="Self.ProjectGroup" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ProjectGroup">
+              <PropertyRef Name="createdBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ProjectGr__creat__73852659">
+          <End Role="Session" Type="Self.Session" Multiplicity="0..1" />
+          <End Role="ProjectGroup" Type="Self.ProjectGroup" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Session">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ProjectGroup">
+              <PropertyRef Name="createdSession" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ProjectGr__proje__6383C8BA">
+          <End Role="OfferedProject" Type="Self.OfferedProject" Multiplicity="0..1" />
+          <End Role="ProjectGroup" Type="Self.ProjectGroup" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OfferedProject">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ProjectGroup">
+              <PropertyRef Name="projectID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ProjectGr__super__628FA481">
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="ProjectGroup" Type="Self.ProjectGroup" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ProjectGroup">
+              <PropertyRef Name="supervisorID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Recurring__meeti__1332DBDC">
+          <End Role="SuperVisorMeeting" Type="Self.SuperVisorMeeting" Multiplicity="0..1" />
+          <End Role="RecurringMeetingDays" Type="Self.RecurringMeetingDays" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SuperVisorMeeting">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="RecurringMeetingDays">
+              <PropertyRef Name="meetingID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__StudentFy__sessi__7A3223E8">
+          <End Role="Session" Type="Self.Session" Multiplicity="0..1" />
+          <End Role="StudentFypAttempts" Type="Self.StudentFypAttempts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Session">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="StudentFypAttempts">
+              <PropertyRef Name="sessionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__StudentFy__stude__7D0E9093">
+          <End Role="Students" Type="Self.Students" Multiplicity="0..1" />
+          <End Role="StudentFypAttempts" Type="Self.StudentFypAttempts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Students">
+              <PropertyRef Name="regNum" />
+            </Principal>
+            <Dependent Role="StudentFypAttempts">
+              <PropertyRef Name="studentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Students__admiss__52593CB8">
+          <End Role="Session" Type="Self.Session" Multiplicity="0..1" />
+          <End Role="Students" Type="Self.Students" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Session">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Students">
+              <PropertyRef Name="admissionSession" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Students__regNum__5165187F">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="Students" Type="Self.Students" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Students">
+              <PropertyRef Name="regNum" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Students__select__534D60F1">
+          <End Role="Technology" Type="Self.Technology" Multiplicity="0..1" />
+          <End Role="Students" Type="Self.Students" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Technology">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Students">
+              <PropertyRef Name="selectedTech" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Students__studen__5441852A">
+          <End Role="Department" Type="Self.Department" Multiplicity="0..1" />
+          <End Role="Students" Type="Self.Students" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Department">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Students">
+              <PropertyRef Name="studentDepartment" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Students__studen__662B2B3B">
+          <End Role="Section" Type="Self.Section" Multiplicity="0..1" />
+          <End Role="Students" Type="Self.Students" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Section">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Students">
+              <PropertyRef Name="studentSection" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SuperViso__creat__0F624AF8">
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="SuperVisorMeeting" Type="Self.SuperVisorMeeting" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="SuperVisorMeeting">
+              <PropertyRef Name="createdBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SupNotBro__meeti__1AD3FDA4">
+          <End Role="SuperVisorMeeting" Type="Self.SuperVisorMeeting" Multiplicity="0..1" />
+          <End Role="SupNotBroadCast" Type="Self.SupNotBroadCast" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SuperVisorMeeting">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="SupNotBroadCast">
+              <PropertyRef Name="meetingID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SupNotBro__stude__19DFD96B">
+          <End Role="Students" Type="Self.Students" Multiplicity="0..1" />
+          <End Role="SupNotBroadCast" Type="Self.SupNotBroadCast" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Students">
+              <PropertyRef Name="regNum" />
+            </Principal>
+            <Dependent Role="SupNotBroadCast">
+              <PropertyRef Name="studentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SupTaskBr__stude__160F4887">
+          <End Role="Students" Type="Self.Students" Multiplicity="0..1" />
+          <End Role="SupTaskBroadCast" Type="Self.SupTaskBroadCast" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Students">
+              <PropertyRef Name="regNum" />
+            </Principal>
+            <Dependent Role="SupTaskBroadCast">
+              <PropertyRef Name="studentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SupTaskBr__taskI__17036CC0">
+          <End Role="Tasks" Type="Self.Tasks" Multiplicity="0..1" />
+          <End Role="SupTaskBroadCast" Type="Self.SupTaskBroadCast" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tasks">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="SupTaskBroadCast">
+              <PropertyRef Name="taskID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__TaskEvalu__taskI__6EF57B66">
+          <End Role="Tasks" Type="Self.Tasks" Multiplicity="0..1" />
+          <End Role="TaskEvaluation" Type="Self.TaskEvaluation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tasks">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="TaskEvaluation">
+              <PropertyRef Name="taskID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Tasks__assignedB__6A30C649">
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="Tasks" Type="Self.Tasks" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Tasks">
+              <PropertyRef Name="assignedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Tasks__studentID__6C190EBB">
+          <End Role="Students" Type="Self.Students" Multiplicity="0..1" />
+          <End Role="Tasks" Type="Self.Tasks" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Students">
+              <PropertyRef Name="regNum" />
+            </Principal>
+            <Dependent Role="Tasks">
+              <PropertyRef Name="studentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="FypProjectProgDBModelStoreContainer">
+          <EntitySet Name="ComiteeMeeting" EntityType="Self.ComiteeMeeting" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Department" EntityType="Self.Department" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Enrollment" EntityType="Self.Enrollment" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FYP2Score" EntityType="Self.FYP2Score" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Fyp2Task" EntityType="Self.Fyp2Task" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Fyp2TaskEvaluation" EntityType="Self.Fyp2TaskEvaluation" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="GroupMembers" EntityType="Self.GroupMembers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="GroupRequestMembers" EntityType="Self.GroupRequestMembers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="GroupRequests" EntityType="Self.GroupRequests" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="GroupSchedule" EntityType="Self.GroupSchedule" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MeetingAttendance" EntityType="Self.MeetingAttendance" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MeetingQueue" EntityType="Self.MeetingQueue" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MeetingQueueAttendance" EntityType="Self.MeetingQueueAttendance" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OfferedProject" EntityType="Self.OfferedProject" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Project" EntityType="Self.Project" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProjectGroup" EntityType="Self.ProjectGroup" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RecurringMeetingDays" EntityType="Self.RecurringMeetingDays" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Section" EntityType="Self.Section" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Session" EntityType="Self.Session" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="StudentFypAttempts" EntityType="Self.StudentFypAttempts" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Students" EntityType="Self.Students" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SuperVisorMeeting" EntityType="Self.SuperVisorMeeting" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SupNotBroadCast" EntityType="Self.SupNotBroadCast" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SupTaskBroadCast" EntityType="Self.SupTaskBroadCast" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TaskEvaluation" EntityType="Self.TaskEvaluation" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tasks" EntityType="Self.Tasks" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Technology" EntityType="Self.Technology" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Fyp1EvaluationParameters" EntityType="Self.Fyp1EvaluationParameters" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Fyp1EvaluationParameters].[id] AS [id], 
+    [Fyp1EvaluationParameters].[name] AS [name], 
+    [Fyp1EvaluationParameters].[percentage] AS [percentage], 
+    [Fyp1EvaluationParameters].[sessionID] AS [sessionID], 
+    [Fyp1EvaluationParameters].[allowEvaluation] AS [allowEvaluation]
+    FROM [dbo].[Fyp1EvaluationParameters] AS [Fyp1EvaluationParameters]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Fyp1ParameterEvaluator" EntityType="Self.Fyp1ParameterEvaluator" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Fyp1ParameterEvaluator].[id] AS [id], 
+    [Fyp1ParameterEvaluator].[parameterID] AS [parameterID], 
+    [Fyp1ParameterEvaluator].[evaluatorID] AS [evaluatorID]
+    FROM [dbo].[Fyp1ParameterEvaluator] AS [Fyp1ParameterEvaluator]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Fyp1SubParameter" EntityType="Self.Fyp1SubParameter" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Fyp1SubParameter].[id] AS [id], 
+    [Fyp1SubParameter].[parameterID] AS [parameterID], 
+    [Fyp1SubParameter].[name] AS [name], 
+    [Fyp1SubParameter].[percentage] AS [percentage]
+    FROM [dbo].[Fyp1SubParameter] AS [Fyp1SubParameter]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="SemesterAgenda" EntityType="Self.SemesterAgenda" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [SemesterAgenda].[id] AS [id], 
+    [SemesterAgenda].[program] AS [program], 
+    [SemesterAgenda].[title] AS [title], 
+    [SemesterAgenda].[agendaDate] AS [agendaDate], 
+    [SemesterAgenda].[agendaTime] AS [agendaTime], 
+    [SemesterAgenda].[location] AS [location], 
+    [SemesterAgenda].[sessionID] AS [sessionID], 
+    [SemesterAgenda].[createdAt] AS [createdAt]
+    FROM [dbo].[SemesterAgenda] AS [SemesterAgenda]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="SupervisorAttendance" EntityType="Self.SupervisorAttendance" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [SupervisorAttendance].[id] AS [id], 
+    [SupervisorAttendance].[meetingID] AS [meetingID], 
+    [SupervisorAttendance].[memberID] AS [memberID], 
+    [SupervisorAttendance].[attendanceDate] AS [attendanceDate], 
+    [SupervisorAttendance].[isAttend] AS [isAttend]
+    FROM [dbo].[SupervisorAttendance] AS [SupervisorAttendance]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="TaskAllocation" EntityType="Self.TaskAllocation" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [TaskAllocation].[id] AS [id], 
+    [TaskAllocation].[groupID] AS [groupID], 
+    [TaskAllocation].[meetingID] AS [meetingID], 
+    [TaskAllocation].[taskType] AS [taskType], 
+    [TaskAllocation].[taskDescription] AS [taskDescription], 
+    [TaskAllocation].[remarks] AS [remarks], 
+    [TaskAllocation].[assignedDate] AS [assignedDate], 
+    [TaskAllocation].[sessionID] AS [sessionID]
+    FROM [dbo].[TaskAllocation] AS [TaskAllocation]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK__ComiteeMe__sessi__1DB06A4F" Association="Self.FK__ComiteeMe__sessi__1DB06A4F">
+            <End Role="Session" EntitySet="Session" />
+            <End Role="ComiteeMeeting" EntitySet="ComiteeMeeting" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Enrollmen__sessi__5812160E" Association="Self.FK__Enrollmen__sessi__5812160E">
+            <End Role="Session" EntitySet="Session" />
+            <End Role="Enrollment" EntitySet="Enrollment" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Enrollmen__stude__571DF1D5" Association="Self.FK__Enrollmen__stude__571DF1D5">
+            <End Role="Students" EntitySet="Students" />
+            <End Role="Enrollment" EntitySet="Enrollment" />
+          </AssociationSet>
+          <AssociationSet Name="FK__FYP2Score__evalu__7A672E12" Association="Self.FK__FYP2Score__evalu__7A672E12">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="FYP2Score" EntitySet="FYP2Score" />
+          </AssociationSet>
+          <AssociationSet Name="FK__FYP2Score__evalu__7B5B524B" Association="Self.FK__FYP2Score__evalu__7B5B524B">
+            <End Role="Fyp2TaskEvaluation" EntitySet="Fyp2TaskEvaluation" />
+            <End Role="FYP2Score" EntitySet="FYP2Score" />
+          </AssociationSet>
+          <AssociationSet Name="FK__FYP2Score__group__7D439ABD" Association="Self.FK__FYP2Score__group__7D439ABD">
+            <End Role="GroupMembers" EntitySet="GroupMembers" />
+            <End Role="FYP2Score" EntitySet="FYP2Score" />
+          </AssociationSet>
+          <AssociationSet Name="FK__FYP2Score__sessi__7C4F7684" Association="Self.FK__FYP2Score__sessi__7C4F7684">
+            <End Role="Session" EntitySet="Session" />
+            <End Role="FYP2Score" EntitySet="FYP2Score" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Fyp2Task__sessio__72C60C4A" Association="Self.FK__Fyp2Task__sessio__72C60C4A">
+            <End Role="Session" EntitySet="Session" />
+            <End Role="Fyp2Task" EntitySet="Fyp2Task" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Fyp2TaskE__evalu__76969D2E" Association="Self.FK__Fyp2TaskE__evalu__76969D2E">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Fyp2TaskEvaluation" EntitySet="Fyp2TaskEvaluation" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Fyp2TaskE__stude__778AC167" Association="Self.FK__Fyp2TaskE__stude__778AC167">
+            <End Role="Students" EntitySet="Students" />
+            <End Role="Fyp2TaskEvaluation" EntitySet="Fyp2TaskEvaluation" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Fyp2TaskE__taskI__75A278F5" Association="Self.FK__Fyp2TaskE__taskI__75A278F5">
+            <End Role="Fyp2Task" EntitySet="Fyp2Task" />
+            <End Role="Fyp2TaskEvaluation" EntitySet="Fyp2TaskEvaluation" />
+          </AssociationSet>
+          <AssociationSet Name="FK__GroupMemb__group__66603565" Association="Self.FK__GroupMemb__group__66603565">
+            <End Role="ProjectGroup" EntitySet="ProjectGroup" />
+            <End Role="GroupMembers" EntitySet="GroupMembers" />
+          </AssociationSet>
+          <AssociationSet Name="FK__GroupMemb__stude__6754599E" Association="Self.FK__GroupMemb__stude__6754599E">
+            <End Role="Students" EntitySet="Students" />
+            <End Role="GroupMembers" EntitySet="GroupMembers" />
+          </AssociationSet>
+          <AssociationSet Name="FK__GroupRequ__FromR__4F47C5E3" Association="Self.FK__GroupRequ__FromR__4F47C5E3">
+            <End Role="Students" EntitySet="Students" />
+            <End Role="GroupRequests" EntitySet="GroupRequests" />
+          </AssociationSet>
+          <AssociationSet Name="FK__GroupRequ__Membe__55009F39" Association="Self.FK__GroupRequ__Membe__55009F39">
+            <End Role="Students" EntitySet="Students" />
+            <End Role="GroupRequestMembers" EntitySet="GroupRequestMembers" />
+          </AssociationSet>
+          <AssociationSet Name="FK__GroupRequ__Reque__55F4C372" Association="Self.FK__GroupRequ__Reque__55F4C372">
+            <End Role="GroupRequests" EntitySet="GroupRequests" />
+            <End Role="GroupRequestMembers" EntitySet="GroupRequestMembers" />
+          </AssociationSet>
+          <AssociationSet Name="FK__GroupRequ__Sessi__503BEA1C" Association="Self.FK__GroupRequ__Sessi__503BEA1C">
+            <End Role="Session" EntitySet="Session" />
+            <End Role="GroupRequests" EntitySet="GroupRequests" />
+          </AssociationSet>
+          <AssociationSet Name="FK__GroupSche__comit__22751F6C" Association="Self.FK__GroupSche__comit__22751F6C">
+            <End Role="ComiteeMeeting" EntitySet="ComiteeMeeting" />
+            <End Role="GroupSchedule" EntitySet="GroupSchedule" />
+          </AssociationSet>
+          <AssociationSet Name="FK__MeetingAt__sched__25518C17" Association="Self.FK__MeetingAt__sched__25518C17">
+            <End Role="GroupSchedule" EntitySet="GroupSchedule" />
+            <End Role="MeetingAttendance" EntitySet="MeetingAttendance" />
+          </AssociationSet>
+          <AssociationSet Name="FK__MeetingQu__meeti__2FCF1A8A" Association="Self.FK__MeetingQu__meeti__2FCF1A8A">
+            <End Role="MeetingQueue" EntitySet="MeetingQueue" />
+            <End Role="MeetingQueueAttendance" EntitySet="MeetingQueueAttendance" />
+          </AssociationSet>
+          <AssociationSet Name="FK__MeetingQu__membe__30C33EC3" Association="Self.FK__MeetingQu__membe__30C33EC3">
+            <End Role="GroupMembers" EntitySet="GroupMembers" />
+            <End Role="MeetingQueueAttendance" EntitySet="MeetingQueueAttendance" />
+          </AssociationSet>
+          <AssociationSet Name="FK__MeetingQu__sched__2BFE89A6" Association="Self.FK__MeetingQu__sched__2BFE89A6">
+            <End Role="GroupSchedule" EntitySet="GroupSchedule" />
+            <End Role="MeetingQueue" EntitySet="MeetingQueue" />
+          </AssociationSet>
+          <AssociationSet Name="FK__MeetingQu__sessi__2CF2ADDF" Association="Self.FK__MeetingQu__sessi__2CF2ADDF">
+            <End Role="Session" EntitySet="Session" />
+            <End Role="MeetingQueue" EntitySet="MeetingQueue" />
+          </AssociationSet>
+          <AssociationSet Name="FK__OfferedPr__proje__5EBF139D" Association="Self.FK__OfferedPr__proje__5EBF139D">
+            <End Role="Project" EntitySet="Project" />
+            <End Role="OfferedProject" EntitySet="OfferedProject" />
+          </AssociationSet>
+          <AssociationSet Name="FK__OfferedPr__sessi__5DCAEF64" Association="Self.FK__OfferedPr__sessi__5DCAEF64">
+            <End Role="Session" EntitySet="Session" />
+            <End Role="OfferedProject" EntitySet="OfferedProject" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Project__suggest__5AEE82B9" Association="Self.FK__Project__suggest__5AEE82B9">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Project" EntitySet="Project" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ProjectGr__creat__619B8048" Association="Self.FK__ProjectGr__creat__619B8048">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="ProjectGroup" EntitySet="ProjectGroup" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ProjectGr__creat__73852659" Association="Self.FK__ProjectGr__creat__73852659">
+            <End Role="Session" EntitySet="Session" />
+            <End Role="ProjectGroup" EntitySet="ProjectGroup" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ProjectGr__proje__6383C8BA" Association="Self.FK__ProjectGr__proje__6383C8BA">
+            <End Role="OfferedProject" EntitySet="OfferedProject" />
+            <End Role="ProjectGroup" EntitySet="ProjectGroup" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ProjectGr__super__628FA481" Association="Self.FK__ProjectGr__super__628FA481">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="ProjectGroup" EntitySet="ProjectGroup" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Recurring__meeti__1332DBDC" Association="Self.FK__Recurring__meeti__1332DBDC">
+            <End Role="SuperVisorMeeting" EntitySet="SuperVisorMeeting" />
+            <End Role="RecurringMeetingDays" EntitySet="RecurringMeetingDays" />
+          </AssociationSet>
+          <AssociationSet Name="FK__StudentFy__sessi__7A3223E8" Association="Self.FK__StudentFy__sessi__7A3223E8">
+            <End Role="Session" EntitySet="Session" />
+            <End Role="StudentFypAttempts" EntitySet="StudentFypAttempts" />
+          </AssociationSet>
+          <AssociationSet Name="FK__StudentFy__stude__7D0E9093" Association="Self.FK__StudentFy__stude__7D0E9093">
+            <End Role="Students" EntitySet="Students" />
+            <End Role="StudentFypAttempts" EntitySet="StudentFypAttempts" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Students__admiss__52593CB8" Association="Self.FK__Students__admiss__52593CB8">
+            <End Role="Session" EntitySet="Session" />
+            <End Role="Students" EntitySet="Students" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Students__regNum__5165187F" Association="Self.FK__Students__regNum__5165187F">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Students" EntitySet="Students" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Students__select__534D60F1" Association="Self.FK__Students__select__534D60F1">
+            <End Role="Technology" EntitySet="Technology" />
+            <End Role="Students" EntitySet="Students" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Students__studen__5441852A" Association="Self.FK__Students__studen__5441852A">
+            <End Role="Department" EntitySet="Department" />
+            <End Role="Students" EntitySet="Students" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Students__studen__662B2B3B" Association="Self.FK__Students__studen__662B2B3B">
+            <End Role="Section" EntitySet="Section" />
+            <End Role="Students" EntitySet="Students" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SuperViso__creat__0F624AF8" Association="Self.FK__SuperViso__creat__0F624AF8">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="SuperVisorMeeting" EntitySet="SuperVisorMeeting" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SupNotBro__meeti__1AD3FDA4" Association="Self.FK__SupNotBro__meeti__1AD3FDA4">
+            <End Role="SuperVisorMeeting" EntitySet="SuperVisorMeeting" />
+            <End Role="SupNotBroadCast" EntitySet="SupNotBroadCast" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SupNotBro__stude__19DFD96B" Association="Self.FK__SupNotBro__stude__19DFD96B">
+            <End Role="Students" EntitySet="Students" />
+            <End Role="SupNotBroadCast" EntitySet="SupNotBroadCast" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SupTaskBr__stude__160F4887" Association="Self.FK__SupTaskBr__stude__160F4887">
+            <End Role="Students" EntitySet="Students" />
+            <End Role="SupTaskBroadCast" EntitySet="SupTaskBroadCast" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SupTaskBr__taskI__17036CC0" Association="Self.FK__SupTaskBr__taskI__17036CC0">
+            <End Role="Tasks" EntitySet="Tasks" />
+            <End Role="SupTaskBroadCast" EntitySet="SupTaskBroadCast" />
+          </AssociationSet>
+          <AssociationSet Name="FK__TaskEvalu__taskI__6EF57B66" Association="Self.FK__TaskEvalu__taskI__6EF57B66">
+            <End Role="Tasks" EntitySet="Tasks" />
+            <End Role="TaskEvaluation" EntitySet="TaskEvaluation" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Tasks__assignedB__6A30C649" Association="Self.FK__Tasks__assignedB__6A30C649">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Tasks" EntitySet="Tasks" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Tasks__studentID__6C190EBB" Association="Self.FK__Tasks__studentID__6C190EBB">
+            <End Role="Students" EntitySet="Students" />
+            <End Role="Tasks" EntitySet="Tasks" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="FypProjectProgDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="ComiteeMeeting">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="meetingDescription" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="startDate" Type="DateTime" Precision="0" />
+          <Property Name="endDate" Type="DateTime" Precision="0" />
+          <Property Name="startTime" Type="Time" Precision="7" />
+          <Property Name="endTime" Type="Time" Precision="7" />
+          <Property Name="venue" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="selectedDays" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="sessionID" Type="Int32" />
+          <Property Name="isGraded" Type="Boolean" />
+          <Property Name="isFileRequired" Type="Boolean" />
+          <Property Name="title" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Session" Relationship="Self.FK__ComiteeMe__sessi__1DB06A4F" FromRole="ComiteeMeeting" ToRole="Session" />
+          <NavigationProperty Name="GroupSchedules" Relationship="Self.FK__GroupSche__comit__22751F6C" FromRole="ComiteeMeeting" ToRole="GroupSchedule" />
+        </EntityType>
+        <EntityType Name="Department">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Students" Relationship="Self.FK__Students__studen__5441852A" FromRole="Department" ToRole="Students" />
+        </EntityType>
+        <EntityType Name="Enrollment">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="studentID" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="sessionID" Type="Int32" />
+          <Property Name="subject" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="grade" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Session" Relationship="Self.FK__Enrollmen__sessi__5812160E" FromRole="Enrollment" ToRole="Session" />
+          <NavigationProperty Name="Student" Relationship="Self.FK__Enrollmen__stude__571DF1D5" FromRole="Enrollment" ToRole="Students" />
+        </EntityType>
+        <EntityType Name="FYP2Score">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="evaluatorID" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="evaluationID" Type="Int32" />
+          <Property Name="sessionID" Type="Int32" />
+          <Property Name="score" Type="Int32" />
+          <Property Name="groupMemberID" Type="Int32" />
+          <NavigationProperty Name="User" Relationship="Self.FK__FYP2Score__evalu__7A672E12" FromRole="FYP2Score" ToRole="Users" />
+          <NavigationProperty Name="Fyp2TaskEvaluation" Relationship="Self.FK__FYP2Score__evalu__7B5B524B" FromRole="FYP2Score" ToRole="Fyp2TaskEvaluation" />
+          <NavigationProperty Name="GroupMember" Relationship="Self.FK__FYP2Score__group__7D439ABD" FromRole="FYP2Score" ToRole="GroupMembers" />
+          <NavigationProperty Name="Session" Relationship="Self.FK__FYP2Score__sessi__7C4F7684" FromRole="FYP2Score" ToRole="Session" />
+        </EntityType>
+        <EntityType Name="Fyp2Task">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="groupID" Type="Int32" />
+          <Property Name="sessionID" Type="Int32" />
+          <Property Name="taskDescription" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Session" Relationship="Self.FK__Fyp2Task__sessio__72C60C4A" FromRole="Fyp2Task" ToRole="Session" />
+          <NavigationProperty Name="Fyp2TaskEvaluation" Relationship="Self.FK__Fyp2TaskE__taskI__75A278F5" FromRole="Fyp2Task" ToRole="Fyp2TaskEvaluation" />
+        </EntityType>
+        <EntityType Name="Fyp2TaskEvaluation">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="taskID" Type="Int32" />
+          <Property Name="evaluatorID" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="studentID" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="remarks" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="FYP2Score" Relationship="Self.FK__FYP2Score__evalu__7B5B524B" FromRole="Fyp2TaskEvaluation" ToRole="FYP2Score" />
+          <NavigationProperty Name="Fyp2Task" Relationship="Self.FK__Fyp2TaskE__taskI__75A278F5" FromRole="Fyp2TaskEvaluation" ToRole="Fyp2Task" />
+          <NavigationProperty Name="User" Relationship="Self.FK__Fyp2TaskE__evalu__76969D2E" FromRole="Fyp2TaskEvaluation" ToRole="Users" />
+          <NavigationProperty Name="Student" Relationship="Self.FK__Fyp2TaskE__stude__778AC167" FromRole="Fyp2TaskEvaluation" ToRole="Students" />
+        </EntityType>
+        <EntityType Name="GroupMember">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="groupID" Type="Int32" />
+          <Property Name="studentID" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="isAdmin" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="FYP2Score" Relationship="Self.FK__FYP2Score__group__7D439ABD" FromRole="GroupMembers" ToRole="FYP2Score" />
+          <NavigationProperty Name="ProjectGroup" Relationship="Self.FK__GroupMemb__group__66603565" FromRole="GroupMembers" ToRole="ProjectGroup" />
+          <NavigationProperty Name="Student" Relationship="Self.FK__GroupMemb__stude__6754599E" FromRole="GroupMembers" ToRole="Students" />
+          <NavigationProperty Name="MeetingQueueAttendances" Relationship="Self.FK__MeetingQu__membe__30C33EC3" FromRole="GroupMembers" ToRole="MeetingQueueAttendance" />
+        </EntityType>
+        <EntityType Name="GroupRequestMember">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RequestID" Type="Int32" Nullable="false" />
+          <Property Name="MemberRegNum" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Status" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Student" Relationship="Self.FK__GroupRequ__Membe__55009F39" FromRole="GroupRequestMembers" ToRole="Students" />
+          <NavigationProperty Name="GroupRequest" Relationship="Self.FK__GroupRequ__Reque__55F4C372" FromRole="GroupRequestMembers" ToRole="GroupRequests" />
+        </EntityType>
+        <EntityType Name="GroupRequest">
+          <Key>
+            <PropertyRef Name="RequestID" />
+          </Key>
+          <Property Name="RequestID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FromRegNum" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="SessionID" Type="Int32" />
+          <Property Name="RequestDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="GroupRequestMembers" Relationship="Self.FK__GroupRequ__Reque__55F4C372" FromRole="GroupRequests" ToRole="GroupRequestMembers" />
+          <NavigationProperty Name="Student" Relationship="Self.FK__GroupRequ__FromR__4F47C5E3" FromRole="GroupRequests" ToRole="Students" />
+          <NavigationProperty Name="Session" Relationship="Self.FK__GroupRequ__Sessi__503BEA1C" FromRole="GroupRequests" ToRole="Session" />
+        </EntityType>
+        <EntityType Name="GroupSchedule">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="groupID" Type="Int32" />
+          <Property Name="comiteeMeetingID" Type="Int32" />
+          <Property Name="filePath" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Status" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="estimatedTime" Type="Time" Precision="7" />
+          <Property Name="meetingDate" Type="DateTime" Precision="0" />
+          <Property Name="isAttend" Type="Int32" />
+          <Property Name="type" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="ComiteeMeeting" Relationship="Self.FK__GroupSche__comit__22751F6C" FromRole="GroupSchedule" ToRole="ComiteeMeeting" />
+          <NavigationProperty Name="MeetingAttendances" Relationship="Self.FK__MeetingAt__sched__25518C17" FromRole="GroupSchedule" ToRole="MeetingAttendance" />
+          <NavigationProperty Name="MeetingQueues" Relationship="Self.FK__MeetingQu__sched__2BFE89A6" FromRole="GroupSchedule" ToRole="MeetingQueue" />
+        </EntityType>
+        <EntityType Name="MeetingAttendance">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="scheduleID" Type="Int32" />
+          <Property Name="attendance" Type="Boolean" />
+          <Property Name="remarks" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="studentID" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="GroupSchedule" Relationship="Self.FK__MeetingAt__sched__25518C17" FromRole="MeetingAttendance" ToRole="GroupSchedule" />
+        </EntityType>
+        <EntityType Name="MeetingQueue">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="meetingDate" Type="DateTime" Precision="0" />
+          <Property Name="meetingTime" Type="Time" Precision="7" />
+          <Property Name="status" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="scheduleID" Type="Int32" />
+          <Property Name="sessionID" Type="Int32" />
+          <NavigationProperty Name="GroupSchedule" Relationship="Self.FK__MeetingQu__sched__2BFE89A6" FromRole="MeetingQueue" ToRole="GroupSchedule" />
+          <NavigationProperty Name="MeetingQueueAttendances" Relationship="Self.FK__MeetingQu__meeti__2FCF1A8A" FromRole="MeetingQueue" ToRole="MeetingQueueAttendance" />
+          <NavigationProperty Name="Session" Relationship="Self.FK__MeetingQu__sessi__2CF2ADDF" FromRole="MeetingQueue" ToRole="Session" />
+        </EntityType>
+        <EntityType Name="MeetingQueueAttendance">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="meetingQueueID" Type="Int32" />
+          <Property Name="memberID" Type="Int32" />
+          <Property Name="isPresent" Type="Boolean" />
+          <NavigationProperty Name="GroupMember" Relationship="Self.FK__MeetingQu__membe__30C33EC3" FromRole="MeetingQueueAttendance" ToRole="GroupMembers" />
+          <NavigationProperty Name="MeetingQueue" Relationship="Self.FK__MeetingQu__meeti__2FCF1A8A" FromRole="MeetingQueueAttendance" ToRole="MeetingQueue" />
+        </EntityType>
+        <EntityType Name="OfferedProject">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="sessionID" Type="Int32" />
+          <Property Name="projectID" Type="Int32" />
+          <NavigationProperty Name="Project" Relationship="Self.FK__OfferedPr__proje__5EBF139D" FromRole="OfferedProject" ToRole="Project" />
+          <NavigationProperty Name="Session" Relationship="Self.FK__OfferedPr__sessi__5DCAEF64" FromRole="OfferedProject" ToRole="Session" />
+          <NavigationProperty Name="ProjectGroups" Relationship="Self.FK__ProjectGr__proje__6383C8BA" FromRole="OfferedProject" ToRole="ProjectGroup" />
+        </EntityType>
+        <EntityType Name="Project">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="title" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="suggestedBy" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="projectStatus" Type="Boolean" />
+          <Property Name="objectives" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="OfferedProjects" Relationship="Self.FK__OfferedPr__proje__5EBF139D" FromRole="Project" ToRole="OfferedProject" />
+          <NavigationProperty Name="User" Relationship="Self.FK__Project__suggest__5AEE82B9" FromRole="Project" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="ProjectGroup">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="createdBy" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="supervisorID" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="projectID" Type="Int32" />
+          <Property Name="isFinalized" Type="Int32" Nullable="false" />
+          <Property Name="createdSession" Type="Int32" />
+          <NavigationProperty Name="GroupMembers" Relationship="Self.FK__GroupMemb__group__66603565" FromRole="ProjectGroup" ToRole="GroupMembers" />
+          <NavigationProperty Name="OfferedProject" Relationship="Self.FK__ProjectGr__proje__6383C8BA" FromRole="ProjectGroup" ToRole="OfferedProject" />
+          <NavigationProperty Name="User" Relationship="Self.FK__ProjectGr__creat__619B8048" FromRole="ProjectGroup" ToRole="Users" />
+          <NavigationProperty Name="Session" Relationship="Self.FK__ProjectGr__creat__73852659" FromRole="ProjectGroup" ToRole="Session" />
+          <NavigationProperty Name="User1" Relationship="Self.FK__ProjectGr__super__628FA481" FromRole="ProjectGroup" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="RecurringMeetingDay">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="meetingID" Type="Int32" />
+          <Property Name="meetingDay" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="SuperVisorMeeting" Relationship="Self.FK__Recurring__meeti__1332DBDC" FromRole="RecurringMeetingDays" ToRole="SuperVisorMeeting" />
+        </EntityType>
+        <EntityType Name="Section">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Students" Relationship="Self.FK__Students__studen__662B2B3B" FromRole="Section" ToRole="Students" />
+        </EntityType>
+        <EntityType Name="Session">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="startDate" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="ComiteeMeetings" Relationship="Self.FK__ComiteeMe__sessi__1DB06A4F" FromRole="Session" ToRole="ComiteeMeeting" />
+          <NavigationProperty Name="Enrollments" Relationship="Self.FK__Enrollmen__sessi__5812160E" FromRole="Session" ToRole="Enrollment" />
+          <NavigationProperty Name="FYP2Score" Relationship="Self.FK__FYP2Score__sessi__7C4F7684" FromRole="Session" ToRole="FYP2Score" />
+          <NavigationProperty Name="Fyp2Task" Relationship="Self.FK__Fyp2Task__sessio__72C60C4A" FromRole="Session" ToRole="Fyp2Task" />
+          <NavigationProperty Name="GroupRequests" Relationship="Self.FK__GroupRequ__Sessi__503BEA1C" FromRole="Session" ToRole="GroupRequests" />
+          <NavigationProperty Name="MeetingQueues" Relationship="Self.FK__MeetingQu__sessi__2CF2ADDF" FromRole="Session" ToRole="MeetingQueue" />
+          <NavigationProperty Name="OfferedProjects" Relationship="Self.FK__OfferedPr__sessi__5DCAEF64" FromRole="Session" ToRole="OfferedProject" />
+          <NavigationProperty Name="ProjectGroups" Relationship="Self.FK__ProjectGr__creat__73852659" FromRole="Session" ToRole="ProjectGroup" />
+          <NavigationProperty Name="StudentFypAttempts" Relationship="Self.FK__StudentFy__sessi__7A3223E8" FromRole="Session" ToRole="StudentFypAttempts" />
+          <NavigationProperty Name="Students" Relationship="Self.FK__Students__admiss__52593CB8" FromRole="Session" ToRole="Students" />
+        </EntityType>
+        <EntityType Name="StudentFypAttempt">
+          <Key>
+            <PropertyRef Name="attemptId" />
+          </Key>
+          <Property Name="attemptId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="studentId" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="sessionId" Type="Int32" />
+          <Property Name="groupId" Type="Int32" />
+          <Property Name="fypType" Type="Byte" />
+          <Property Name="status" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="createdAt" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Session" Relationship="Self.FK__StudentFy__sessi__7A3223E8" FromRole="StudentFypAttempts" ToRole="Session" />
+          <NavigationProperty Name="Student" Relationship="Self.FK__StudentFy__stude__7D0E9093" FromRole="StudentFypAttempts" ToRole="Students" />
+        </EntityType>
+        <EntityType Name="Student">
+          <Key>
+            <PropertyRef Name="regNum" />
+          </Key>
+          <Property Name="regNum" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="admissionSession" Type="Int32" />
+          <Property Name="currentCGPA" Type="Double" />
+          <Property Name="gender" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="selectedTech" Type="Int32" />
+          <Property Name="studentDepartment" Type="Int32" />
+          <Property Name="studentSection" Type="Int32" />
+          <NavigationProperty Name="Department" Relationship="Self.FK__Students__studen__5441852A" FromRole="Students" ToRole="Department" />
+          <NavigationProperty Name="Enrollments" Relationship="Self.FK__Enrollmen__stude__571DF1D5" FromRole="Students" ToRole="Enrollment" />
+          <NavigationProperty Name="Fyp2TaskEvaluation" Relationship="Self.FK__Fyp2TaskE__stude__778AC167" FromRole="Students" ToRole="Fyp2TaskEvaluation" />
+          <NavigationProperty Name="GroupMembers" Relationship="Self.FK__GroupMemb__stude__6754599E" FromRole="Students" ToRole="GroupMembers" />
+          <NavigationProperty Name="GroupRequestMembers" Relationship="Self.FK__GroupRequ__Membe__55009F39" FromRole="Students" ToRole="GroupRequestMembers" />
+          <NavigationProperty Name="GroupRequests" Relationship="Self.FK__GroupRequ__FromR__4F47C5E3" FromRole="Students" ToRole="GroupRequests" />
+          <NavigationProperty Name="Section" Relationship="Self.FK__Students__studen__662B2B3B" FromRole="Students" ToRole="Section" />
+          <NavigationProperty Name="Session" Relationship="Self.FK__Students__admiss__52593CB8" FromRole="Students" ToRole="Session" />
+          <NavigationProperty Name="StudentFypAttempts" Relationship="Self.FK__StudentFy__stude__7D0E9093" FromRole="Students" ToRole="StudentFypAttempts" />
+          <NavigationProperty Name="User" Relationship="Self.FK__Students__regNum__5165187F" FromRole="Students" ToRole="Users" />
+          <NavigationProperty Name="Technology" Relationship="Self.FK__Students__select__534D60F1" FromRole="Students" ToRole="Technology" />
+          <NavigationProperty Name="SupNotBroadCasts" Relationship="Self.FK__SupNotBro__stude__19DFD96B" FromRole="Students" ToRole="SupNotBroadCast" />
+          <NavigationProperty Name="SupTaskBroadCasts" Relationship="Self.FK__SupTaskBr__stude__160F4887" FromRole="Students" ToRole="SupTaskBroadCast" />
+          <NavigationProperty Name="Tasks" Relationship="Self.FK__Tasks__studentID__6C190EBB" FromRole="Students" ToRole="Tasks" />
+        </EntityType>
+        <EntityType Name="SuperVisorMeeting">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="date" Type="DateTime" Precision="0" />
+          <Property Name="time" Type="Time" Precision="7" />
+          <Property Name="day" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="venue" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="createdBy" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="groupID" Type="Int32" />
+          <Property Name="isRecurring" Type="Boolean" />
+          <Property Name="memberId" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="RecurringMeetingDays" Relationship="Self.FK__Recurring__meeti__1332DBDC" FromRole="SuperVisorMeeting" ToRole="RecurringMeetingDays" />
+          <NavigationProperty Name="User" Relationship="Self.FK__SuperViso__creat__0F624AF8" FromRole="SuperVisorMeeting" ToRole="Users" />
+          <NavigationProperty Name="SupNotBroadCasts" Relationship="Self.FK__SupNotBro__meeti__1AD3FDA4" FromRole="SuperVisorMeeting" ToRole="SupNotBroadCast" />
+        </EntityType>
+        <EntityType Name="SupNotBroadCast">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="studentID" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="meetingID" Type="Int32" />
+          <Property Name="notStatus" Type="Boolean" />
+          <NavigationProperty Name="Student" Relationship="Self.FK__SupNotBro__stude__19DFD96B" FromRole="SupNotBroadCast" ToRole="Students" />
+          <NavigationProperty Name="SuperVisorMeeting" Relationship="Self.FK__SupNotBro__meeti__1AD3FDA4" FromRole="SupNotBroadCast" ToRole="SuperVisorMeeting" />
+        </EntityType>
+        <EntityType Name="SupTaskBroadCast">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="studentID" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="taskID" Type="Int32" />
+          <Property Name="notStatus" Type="Boolean" />
+          <NavigationProperty Name="Student" Relationship="Self.FK__SupTaskBr__stude__160F4887" FromRole="SupTaskBroadCast" ToRole="Students" />
+          <NavigationProperty Name="Task" Relationship="Self.FK__SupTaskBr__taskI__17036CC0" FromRole="SupTaskBroadCast" ToRole="Tasks" />
+        </EntityType>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="TaskEvaluation">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="taskID" Type="Int32" />
+          <Property Name="taskRemarks" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="submissionFilePath" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="submissionDate" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="Task" Relationship="Self.FK__TaskEvalu__taskI__6EF57B66" FromRole="TaskEvaluation" ToRole="Tasks" />
+        </EntityType>
+        <EntityType Name="Task">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="title" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="taskDescription" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="assignDate" Type="DateTime" Precision="0" />
+          <Property Name="dueDate" Type="DateTime" Precision="0" />
+          <Property Name="assignedBy" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="groupID" Type="Int32" />
+          <Property Name="studentID" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="isPptRequired" Type="Boolean" />
+          <Property Name="taskStatus" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Student" Relationship="Self.FK__Tasks__studentID__6C190EBB" FromRole="Tasks" ToRole="Students" />
+          <NavigationProperty Name="SupTaskBroadCasts" Relationship="Self.FK__SupTaskBr__taskI__17036CC0" FromRole="Tasks" ToRole="SupTaskBroadCast" />
+          <NavigationProperty Name="TaskEvaluations" Relationship="Self.FK__TaskEvalu__taskI__6EF57B66" FromRole="Tasks" ToRole="TaskEvaluation" />
+          <NavigationProperty Name="User" Relationship="Self.FK__Tasks__assignedB__6A30C649" FromRole="Tasks" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="Technology">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Students" Relationship="Self.FK__Students__select__534D60F1" FromRole="Technology" ToRole="Students" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="role" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="FYP2Score" Relationship="Self.FK__FYP2Score__evalu__7A672E12" FromRole="Users" ToRole="FYP2Score" />
+          <NavigationProperty Name="Fyp2TaskEvaluation" Relationship="Self.FK__Fyp2TaskE__evalu__76969D2E" FromRole="Users" ToRole="Fyp2TaskEvaluation" />
+          <NavigationProperty Name="Projects" Relationship="Self.FK__Project__suggest__5AEE82B9" FromRole="Users" ToRole="Project" />
+          <NavigationProperty Name="ProjectGroups" Relationship="Self.FK__ProjectGr__creat__619B8048" FromRole="Users" ToRole="ProjectGroup" />
+          <NavigationProperty Name="ProjectGroups1" Relationship="Self.FK__ProjectGr__super__628FA481" FromRole="Users" ToRole="ProjectGroup" />
+          <NavigationProperty Name="Student" Relationship="Self.FK__Students__regNum__5165187F" FromRole="Users" ToRole="Students" />
+          <NavigationProperty Name="SuperVisorMeetings" Relationship="Self.FK__SuperViso__creat__0F624AF8" FromRole="Users" ToRole="SuperVisorMeeting" />
+          <NavigationProperty Name="Tasks" Relationship="Self.FK__Tasks__assignedB__6A30C649" FromRole="Users" ToRole="Tasks" />
+        </EntityType>
+        <EntityType Name="Fyp1EvaluationParameters">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="percentage" Type="Int32" />
+          <Property Name="sessionID" Type="Int32" />
+          <Property Name="allowEvaluation" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="Fyp1ParameterEvaluator">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="parameterID" Type="Int32" />
+          <Property Name="evaluatorID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Fyp1SubParameter">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="parameterID" Type="Int32" />
+          <Property Name="name" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="percentage" Type="Int32" />
+        </EntityType>
+        <EntityType Name="SemesterAgenda">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="program" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="title" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="agendaDate" Type="DateTime" Precision="0" />
+          <Property Name="agendaTime" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="location" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="sessionID" Type="Int32" />
+          <Property Name="createdAt" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="SupervisorAttendance">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="meetingID" Type="Int32" />
+          <Property Name="memberID" Type="Int32" />
+          <Property Name="attendanceDate" Type="DateTime" Precision="0" />
+          <Property Name="isAttend" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="TaskAllocation">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="groupID" Type="Int32" />
+          <Property Name="meetingID" Type="Int32" />
+          <Property Name="taskType" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="taskDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="remarks" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="assignedDate" Type="DateTime" Precision="0" />
+          <Property Name="sessionID" Type="Int32" />
+        </EntityType>
+        <Association Name="FK__ComiteeMe__sessi__1DB06A4F">
+          <End Role="Session" Type="Self.Session" Multiplicity="0..1" />
+          <End Role="ComiteeMeeting" Type="Self.ComiteeMeeting" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Session">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ComiteeMeeting">
+              <PropertyRef Name="sessionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__GroupSche__comit__22751F6C">
+          <End Role="ComiteeMeeting" Type="Self.ComiteeMeeting" Multiplicity="0..1" />
+          <End Role="GroupSchedule" Type="Self.GroupSchedule" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ComiteeMeeting">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="GroupSchedule">
+              <PropertyRef Name="comiteeMeetingID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Students__studen__5441852A">
+          <End Role="Department" Type="Self.Department" Multiplicity="0..1" />
+          <End Role="Students" Type="Self.Student" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Department">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Students">
+              <PropertyRef Name="studentDepartment" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Enrollmen__sessi__5812160E">
+          <End Role="Session" Type="Self.Session" Multiplicity="0..1" />
+          <End Role="Enrollment" Type="Self.Enrollment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Session">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Enrollment">
+              <PropertyRef Name="sessionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Enrollmen__stude__571DF1D5">
+          <End Role="Students" Type="Self.Student" Multiplicity="0..1" />
+          <End Role="Enrollment" Type="Self.Enrollment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Students">
+              <PropertyRef Name="regNum" />
+            </Principal>
+            <Dependent Role="Enrollment">
+              <PropertyRef Name="studentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__FYP2Score__evalu__7A672E12">
+          <End Role="Users" Type="Self.User" Multiplicity="0..1" />
+          <End Role="FYP2Score" Type="Self.FYP2Score" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="FYP2Score">
+              <PropertyRef Name="evaluatorID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__FYP2Score__evalu__7B5B524B">
+          <End Role="Fyp2TaskEvaluation" Type="Self.Fyp2TaskEvaluation" Multiplicity="0..1" />
+          <End Role="FYP2Score" Type="Self.FYP2Score" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Fyp2TaskEvaluation">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="FYP2Score">
+              <PropertyRef Name="evaluationID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__FYP2Score__group__7D439ABD">
+          <End Role="GroupMembers" Type="Self.GroupMember" Multiplicity="0..1" />
+          <End Role="FYP2Score" Type="Self.FYP2Score" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GroupMembers">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="FYP2Score">
+              <PropertyRef Name="groupMemberID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__FYP2Score__sessi__7C4F7684">
+          <End Role="Session" Type="Self.Session" Multiplicity="0..1" />
+          <End Role="FYP2Score" Type="Self.FYP2Score" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Session">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="FYP2Score">
+              <PropertyRef Name="sessionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Fyp2Task__sessio__72C60C4A">
+          <End Role="Session" Type="Self.Session" Multiplicity="0..1" />
+          <End Role="Fyp2Task" Type="Self.Fyp2Task" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Session">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Fyp2Task">
+              <PropertyRef Name="sessionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Fyp2TaskE__taskI__75A278F5">
+          <End Role="Fyp2Task" Type="Self.Fyp2Task" Multiplicity="0..1" />
+          <End Role="Fyp2TaskEvaluation" Type="Self.Fyp2TaskEvaluation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Fyp2Task">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Fyp2TaskEvaluation">
+              <PropertyRef Name="taskID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Fyp2TaskE__evalu__76969D2E">
+          <End Role="Users" Type="Self.User" Multiplicity="0..1" />
+          <End Role="Fyp2TaskEvaluation" Type="Self.Fyp2TaskEvaluation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Fyp2TaskEvaluation">
+              <PropertyRef Name="evaluatorID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Fyp2TaskE__stude__778AC167">
+          <End Role="Students" Type="Self.Student" Multiplicity="0..1" />
+          <End Role="Fyp2TaskEvaluation" Type="Self.Fyp2TaskEvaluation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Students">
+              <PropertyRef Name="regNum" />
+            </Principal>
+            <Dependent Role="Fyp2TaskEvaluation">
+              <PropertyRef Name="studentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__GroupMemb__group__66603565">
+          <End Role="ProjectGroup" Type="Self.ProjectGroup" Multiplicity="0..1" />
+          <End Role="GroupMembers" Type="Self.GroupMember" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProjectGroup">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="GroupMembers">
+              <PropertyRef Name="groupID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__GroupMemb__stude__6754599E">
+          <End Role="Students" Type="Self.Student" Multiplicity="0..1" />
+          <End Role="GroupMembers" Type="Self.GroupMember" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Students">
+              <PropertyRef Name="regNum" />
+            </Principal>
+            <Dependent Role="GroupMembers">
+              <PropertyRef Name="studentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__MeetingQu__membe__30C33EC3">
+          <End Role="GroupMembers" Type="Self.GroupMember" Multiplicity="0..1" />
+          <End Role="MeetingQueueAttendance" Type="Self.MeetingQueueAttendance" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GroupMembers">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="MeetingQueueAttendance">
+              <PropertyRef Name="memberID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__GroupRequ__Membe__55009F39">
+          <End Role="Students" Type="Self.Student" Multiplicity="0..1" />
+          <End Role="GroupRequestMembers" Type="Self.GroupRequestMember" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Students">
+              <PropertyRef Name="regNum" />
+            </Principal>
+            <Dependent Role="GroupRequestMembers">
+              <PropertyRef Name="MemberRegNum" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__GroupRequ__Reque__55F4C372">
+          <End Role="GroupRequests" Type="Self.GroupRequest" Multiplicity="1" />
+          <End Role="GroupRequestMembers" Type="Self.GroupRequestMember" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GroupRequests">
+              <PropertyRef Name="RequestID" />
+            </Principal>
+            <Dependent Role="GroupRequestMembers">
+              <PropertyRef Name="RequestID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__GroupRequ__FromR__4F47C5E3">
+          <End Role="Students" Type="Self.Student" Multiplicity="0..1" />
+          <End Role="GroupRequests" Type="Self.GroupRequest" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Students">
+              <PropertyRef Name="regNum" />
+            </Principal>
+            <Dependent Role="GroupRequests">
+              <PropertyRef Name="FromRegNum" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__GroupRequ__Sessi__503BEA1C">
+          <End Role="Session" Type="Self.Session" Multiplicity="0..1" />
+          <End Role="GroupRequests" Type="Self.GroupRequest" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Session">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="GroupRequests">
+              <PropertyRef Name="SessionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__MeetingAt__sched__25518C17">
+          <End Role="GroupSchedule" Type="Self.GroupSchedule" Multiplicity="0..1" />
+          <End Role="MeetingAttendance" Type="Self.MeetingAttendance" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GroupSchedule">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="MeetingAttendance">
+              <PropertyRef Name="scheduleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__MeetingQu__sched__2BFE89A6">
+          <End Role="GroupSchedule" Type="Self.GroupSchedule" Multiplicity="0..1" />
+          <End Role="MeetingQueue" Type="Self.MeetingQueue" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GroupSchedule">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="MeetingQueue">
+              <PropertyRef Name="scheduleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__MeetingQu__meeti__2FCF1A8A">
+          <End Role="MeetingQueue" Type="Self.MeetingQueue" Multiplicity="0..1" />
+          <End Role="MeetingQueueAttendance" Type="Self.MeetingQueueAttendance" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MeetingQueue">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="MeetingQueueAttendance">
+              <PropertyRef Name="meetingQueueID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__MeetingQu__sessi__2CF2ADDF">
+          <End Role="Session" Type="Self.Session" Multiplicity="0..1" />
+          <End Role="MeetingQueue" Type="Self.MeetingQueue" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Session">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="MeetingQueue">
+              <PropertyRef Name="sessionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__OfferedPr__proje__5EBF139D">
+          <End Role="Project" Type="Self.Project" Multiplicity="0..1" />
+          <End Role="OfferedProject" Type="Self.OfferedProject" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Project">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="OfferedProject">
+              <PropertyRef Name="projectID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__OfferedPr__sessi__5DCAEF64">
+          <End Role="Session" Type="Self.Session" Multiplicity="0..1" />
+          <End Role="OfferedProject" Type="Self.OfferedProject" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Session">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="OfferedProject">
+              <PropertyRef Name="sessionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ProjectGr__proje__6383C8BA">
+          <End Role="OfferedProject" Type="Self.OfferedProject" Multiplicity="0..1" />
+          <End Role="ProjectGroup" Type="Self.ProjectGroup" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OfferedProject">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ProjectGroup">
+              <PropertyRef Name="projectID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Project__suggest__5AEE82B9">
+          <End Role="Users" Type="Self.User" Multiplicity="0..1" />
+          <End Role="Project" Type="Self.Project" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Project">
+              <PropertyRef Name="suggestedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ProjectGr__creat__619B8048">
+          <End Role="Users" Type="Self.User" Multiplicity="0..1" />
+          <End Role="ProjectGroup" Type="Self.ProjectGroup" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ProjectGroup">
+              <PropertyRef Name="createdBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ProjectGr__creat__73852659">
+          <End Role="Session" Type="Self.Session" Multiplicity="0..1" />
+          <End Role="ProjectGroup" Type="Self.ProjectGroup" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Session">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ProjectGroup">
+              <PropertyRef Name="createdSession" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ProjectGr__super__628FA481">
+          <End Role="Users" Type="Self.User" Multiplicity="0..1" />
+          <End Role="ProjectGroup" Type="Self.ProjectGroup" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ProjectGroup">
+              <PropertyRef Name="supervisorID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Recurring__meeti__1332DBDC">
+          <End Role="SuperVisorMeeting" Type="Self.SuperVisorMeeting" Multiplicity="0..1" />
+          <End Role="RecurringMeetingDays" Type="Self.RecurringMeetingDay" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SuperVisorMeeting">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="RecurringMeetingDays">
+              <PropertyRef Name="meetingID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Students__studen__662B2B3B">
+          <End Role="Section" Type="Self.Section" Multiplicity="0..1" />
+          <End Role="Students" Type="Self.Student" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Section">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Students">
+              <PropertyRef Name="studentSection" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__StudentFy__sessi__7A3223E8">
+          <End Role="Session" Type="Self.Session" Multiplicity="0..1" />
+          <End Role="StudentFypAttempts" Type="Self.StudentFypAttempt" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Session">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="StudentFypAttempts">
+              <PropertyRef Name="sessionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Students__admiss__52593CB8">
+          <End Role="Session" Type="Self.Session" Multiplicity="0..1" />
+          <End Role="Students" Type="Self.Student" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Session">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Students">
+              <PropertyRef Name="admissionSession" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__StudentFy__stude__7D0E9093">
+          <End Role="Students" Type="Self.Student" Multiplicity="0..1" />
+          <End Role="StudentFypAttempts" Type="Self.StudentFypAttempt" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Students">
+              <PropertyRef Name="regNum" />
+            </Principal>
+            <Dependent Role="StudentFypAttempts">
+              <PropertyRef Name="studentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Students__regNum__5165187F">
+          <End Role="Users" Type="Self.User" Multiplicity="1" />
+          <End Role="Students" Type="Self.Student" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Students">
+              <PropertyRef Name="regNum" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Students__select__534D60F1">
+          <End Role="Technology" Type="Self.Technology" Multiplicity="0..1" />
+          <End Role="Students" Type="Self.Student" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Technology">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Students">
+              <PropertyRef Name="selectedTech" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SupNotBro__stude__19DFD96B">
+          <End Role="Students" Type="Self.Student" Multiplicity="0..1" />
+          <End Role="SupNotBroadCast" Type="Self.SupNotBroadCast" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Students">
+              <PropertyRef Name="regNum" />
+            </Principal>
+            <Dependent Role="SupNotBroadCast">
+              <PropertyRef Name="studentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SupTaskBr__stude__160F4887">
+          <End Role="Students" Type="Self.Student" Multiplicity="0..1" />
+          <End Role="SupTaskBroadCast" Type="Self.SupTaskBroadCast" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Students">
+              <PropertyRef Name="regNum" />
+            </Principal>
+            <Dependent Role="SupTaskBroadCast">
+              <PropertyRef Name="studentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Tasks__studentID__6C190EBB">
+          <End Role="Students" Type="Self.Student" Multiplicity="0..1" />
+          <End Role="Tasks" Type="Self.Task" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Students">
+              <PropertyRef Name="regNum" />
+            </Principal>
+            <Dependent Role="Tasks">
+              <PropertyRef Name="studentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SuperViso__creat__0F624AF8">
+          <End Role="Users" Type="Self.User" Multiplicity="0..1" />
+          <End Role="SuperVisorMeeting" Type="Self.SuperVisorMeeting" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="SuperVisorMeeting">
+              <PropertyRef Name="createdBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SupNotBro__meeti__1AD3FDA4">
+          <End Role="SuperVisorMeeting" Type="Self.SuperVisorMeeting" Multiplicity="0..1" />
+          <End Role="SupNotBroadCast" Type="Self.SupNotBroadCast" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SuperVisorMeeting">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="SupNotBroadCast">
+              <PropertyRef Name="meetingID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SupTaskBr__taskI__17036CC0">
+          <End Role="Tasks" Type="Self.Task" Multiplicity="0..1" />
+          <End Role="SupTaskBroadCast" Type="Self.SupTaskBroadCast" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tasks">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="SupTaskBroadCast">
+              <PropertyRef Name="taskID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__TaskEvalu__taskI__6EF57B66">
+          <End Role="Tasks" Type="Self.Task" Multiplicity="0..1" />
+          <End Role="TaskEvaluation" Type="Self.TaskEvaluation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tasks">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="TaskEvaluation">
+              <PropertyRef Name="taskID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Tasks__assignedB__6A30C649">
+          <End Role="Users" Type="Self.User" Multiplicity="0..1" />
+          <End Role="Tasks" Type="Self.Task" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Tasks">
+              <PropertyRef Name="assignedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="FypProjectProgDBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="ComiteeMeetings" EntityType="Self.ComiteeMeeting" />
+          <EntitySet Name="Departments" EntityType="Self.Department" />
+          <EntitySet Name="Enrollments" EntityType="Self.Enrollment" />
+          <EntitySet Name="FYP2Score" EntityType="Self.FYP2Score" />
+          <EntitySet Name="Fyp2Task" EntityType="Self.Fyp2Task" />
+          <EntitySet Name="Fyp2TaskEvaluation" EntityType="Self.Fyp2TaskEvaluation" />
+          <EntitySet Name="GroupMembers" EntityType="Self.GroupMember" />
+          <EntitySet Name="GroupRequestMembers" EntityType="Self.GroupRequestMember" />
+          <EntitySet Name="GroupRequests" EntityType="Self.GroupRequest" />
+          <EntitySet Name="GroupSchedules" EntityType="Self.GroupSchedule" />
+          <EntitySet Name="MeetingAttendances" EntityType="Self.MeetingAttendance" />
+          <EntitySet Name="MeetingQueues" EntityType="Self.MeetingQueue" />
+          <EntitySet Name="MeetingQueueAttendances" EntityType="Self.MeetingQueueAttendance" />
+          <EntitySet Name="OfferedProjects" EntityType="Self.OfferedProject" />
+          <EntitySet Name="Projects" EntityType="Self.Project" />
+          <EntitySet Name="ProjectGroups" EntityType="Self.ProjectGroup" />
+          <EntitySet Name="RecurringMeetingDays" EntityType="Self.RecurringMeetingDay" />
+          <EntitySet Name="Sections" EntityType="Self.Section" />
+          <EntitySet Name="Sessions" EntityType="Self.Session" />
+          <EntitySet Name="StudentFypAttempts" EntityType="Self.StudentFypAttempt" />
+          <EntitySet Name="Students" EntityType="Self.Student" />
+          <EntitySet Name="SuperVisorMeetings" EntityType="Self.SuperVisorMeeting" />
+          <EntitySet Name="SupNotBroadCasts" EntityType="Self.SupNotBroadCast" />
+          <EntitySet Name="SupTaskBroadCasts" EntityType="Self.SupTaskBroadCast" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+          <EntitySet Name="TaskEvaluations" EntityType="Self.TaskEvaluation" />
+          <EntitySet Name="Tasks" EntityType="Self.Task" />
+          <EntitySet Name="Technologies" EntityType="Self.Technology" />
+          <EntitySet Name="Users" EntityType="Self.User" />
+          <EntitySet Name="Fyp1EvaluationParameters" EntityType="Self.Fyp1EvaluationParameters" />
+          <EntitySet Name="Fyp1ParameterEvaluator" EntityType="Self.Fyp1ParameterEvaluator" />
+          <EntitySet Name="Fyp1SubParameter" EntityType="Self.Fyp1SubParameter" />
+          <EntitySet Name="SemesterAgendas" EntityType="Self.SemesterAgenda" />
+          <EntitySet Name="SupervisorAttendances" EntityType="Self.SupervisorAttendance" />
+          <EntitySet Name="TaskAllocations" EntityType="Self.TaskAllocation" />
+          <AssociationSet Name="FK__ComiteeMe__sessi__1DB06A4F" Association="Self.FK__ComiteeMe__sessi__1DB06A4F">
+            <End Role="Session" EntitySet="Sessions" />
+            <End Role="ComiteeMeeting" EntitySet="ComiteeMeetings" />
+          </AssociationSet>
+          <AssociationSet Name="FK__GroupSche__comit__22751F6C" Association="Self.FK__GroupSche__comit__22751F6C">
+            <End Role="ComiteeMeeting" EntitySet="ComiteeMeetings" />
+            <End Role="GroupSchedule" EntitySet="GroupSchedules" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Students__studen__5441852A" Association="Self.FK__Students__studen__5441852A">
+            <End Role="Department" EntitySet="Departments" />
+            <End Role="Students" EntitySet="Students" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Enrollmen__sessi__5812160E" Association="Self.FK__Enrollmen__sessi__5812160E">
+            <End Role="Session" EntitySet="Sessions" />
+            <End Role="Enrollment" EntitySet="Enrollments" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Enrollmen__stude__571DF1D5" Association="Self.FK__Enrollmen__stude__571DF1D5">
+            <End Role="Students" EntitySet="Students" />
+            <End Role="Enrollment" EntitySet="Enrollments" />
+          </AssociationSet>
+          <AssociationSet Name="FK__FYP2Score__evalu__7A672E12" Association="Self.FK__FYP2Score__evalu__7A672E12">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="FYP2Score" EntitySet="FYP2Score" />
+          </AssociationSet>
+          <AssociationSet Name="FK__FYP2Score__evalu__7B5B524B" Association="Self.FK__FYP2Score__evalu__7B5B524B">
+            <End Role="Fyp2TaskEvaluation" EntitySet="Fyp2TaskEvaluation" />
+            <End Role="FYP2Score" EntitySet="FYP2Score" />
+          </AssociationSet>
+          <AssociationSet Name="FK__FYP2Score__group__7D439ABD" Association="Self.FK__FYP2Score__group__7D439ABD">
+            <End Role="GroupMembers" EntitySet="GroupMembers" />
+            <End Role="FYP2Score" EntitySet="FYP2Score" />
+          </AssociationSet>
+          <AssociationSet Name="FK__FYP2Score__sessi__7C4F7684" Association="Self.FK__FYP2Score__sessi__7C4F7684">
+            <End Role="Session" EntitySet="Sessions" />
+            <End Role="FYP2Score" EntitySet="FYP2Score" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Fyp2Task__sessio__72C60C4A" Association="Self.FK__Fyp2Task__sessio__72C60C4A">
+            <End Role="Session" EntitySet="Sessions" />
+            <End Role="Fyp2Task" EntitySet="Fyp2Task" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Fyp2TaskE__taskI__75A278F5" Association="Self.FK__Fyp2TaskE__taskI__75A278F5">
+            <End Role="Fyp2Task" EntitySet="Fyp2Task" />
+            <End Role="Fyp2TaskEvaluation" EntitySet="Fyp2TaskEvaluation" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Fyp2TaskE__evalu__76969D2E" Association="Self.FK__Fyp2TaskE__evalu__76969D2E">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Fyp2TaskEvaluation" EntitySet="Fyp2TaskEvaluation" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Fyp2TaskE__stude__778AC167" Association="Self.FK__Fyp2TaskE__stude__778AC167">
+            <End Role="Students" EntitySet="Students" />
+            <End Role="Fyp2TaskEvaluation" EntitySet="Fyp2TaskEvaluation" />
+          </AssociationSet>
+          <AssociationSet Name="FK__GroupMemb__group__66603565" Association="Self.FK__GroupMemb__group__66603565">
+            <End Role="ProjectGroup" EntitySet="ProjectGroups" />
+            <End Role="GroupMembers" EntitySet="GroupMembers" />
+          </AssociationSet>
+          <AssociationSet Name="FK__GroupMemb__stude__6754599E" Association="Self.FK__GroupMemb__stude__6754599E">
+            <End Role="Students" EntitySet="Students" />
+            <End Role="GroupMembers" EntitySet="GroupMembers" />
+          </AssociationSet>
+          <AssociationSet Name="FK__MeetingQu__membe__30C33EC3" Association="Self.FK__MeetingQu__membe__30C33EC3">
+            <End Role="GroupMembers" EntitySet="GroupMembers" />
+            <End Role="MeetingQueueAttendance" EntitySet="MeetingQueueAttendances" />
+          </AssociationSet>
+          <AssociationSet Name="FK__GroupRequ__Membe__55009F39" Association="Self.FK__GroupRequ__Membe__55009F39">
+            <End Role="Students" EntitySet="Students" />
+            <End Role="GroupRequestMembers" EntitySet="GroupRequestMembers" />
+          </AssociationSet>
+          <AssociationSet Name="FK__GroupRequ__Reque__55F4C372" Association="Self.FK__GroupRequ__Reque__55F4C372">
+            <End Role="GroupRequests" EntitySet="GroupRequests" />
+            <End Role="GroupRequestMembers" EntitySet="GroupRequestMembers" />
+          </AssociationSet>
+          <AssociationSet Name="FK__GroupRequ__FromR__4F47C5E3" Association="Self.FK__GroupRequ__FromR__4F47C5E3">
+            <End Role="Students" EntitySet="Students" />
+            <End Role="GroupRequests" EntitySet="GroupRequests" />
+          </AssociationSet>
+          <AssociationSet Name="FK__GroupRequ__Sessi__503BEA1C" Association="Self.FK__GroupRequ__Sessi__503BEA1C">
+            <End Role="Session" EntitySet="Sessions" />
+            <End Role="GroupRequests" EntitySet="GroupRequests" />
+          </AssociationSet>
+          <AssociationSet Name="FK__MeetingAt__sched__25518C17" Association="Self.FK__MeetingAt__sched__25518C17">
+            <End Role="GroupSchedule" EntitySet="GroupSchedules" />
+            <End Role="MeetingAttendance" EntitySet="MeetingAttendances" />
+          </AssociationSet>
+          <AssociationSet Name="FK__MeetingQu__sched__2BFE89A6" Association="Self.FK__MeetingQu__sched__2BFE89A6">
+            <End Role="GroupSchedule" EntitySet="GroupSchedules" />
+            <End Role="MeetingQueue" EntitySet="MeetingQueues" />
+          </AssociationSet>
+          <AssociationSet Name="FK__MeetingQu__meeti__2FCF1A8A" Association="Self.FK__MeetingQu__meeti__2FCF1A8A">
+            <End Role="MeetingQueue" EntitySet="MeetingQueues" />
+            <End Role="MeetingQueueAttendance" EntitySet="MeetingQueueAttendances" />
+          </AssociationSet>
+          <AssociationSet Name="FK__MeetingQu__sessi__2CF2ADDF" Association="Self.FK__MeetingQu__sessi__2CF2ADDF">
+            <End Role="Session" EntitySet="Sessions" />
+            <End Role="MeetingQueue" EntitySet="MeetingQueues" />
+          </AssociationSet>
+          <AssociationSet Name="FK__OfferedPr__proje__5EBF139D" Association="Self.FK__OfferedPr__proje__5EBF139D">
+            <End Role="Project" EntitySet="Projects" />
+            <End Role="OfferedProject" EntitySet="OfferedProjects" />
+          </AssociationSet>
+          <AssociationSet Name="FK__OfferedPr__sessi__5DCAEF64" Association="Self.FK__OfferedPr__sessi__5DCAEF64">
+            <End Role="Session" EntitySet="Sessions" />
+            <End Role="OfferedProject" EntitySet="OfferedProjects" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ProjectGr__proje__6383C8BA" Association="Self.FK__ProjectGr__proje__6383C8BA">
+            <End Role="OfferedProject" EntitySet="OfferedProjects" />
+            <End Role="ProjectGroup" EntitySet="ProjectGroups" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Project__suggest__5AEE82B9" Association="Self.FK__Project__suggest__5AEE82B9">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Project" EntitySet="Projects" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ProjectGr__creat__619B8048" Association="Self.FK__ProjectGr__creat__619B8048">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="ProjectGroup" EntitySet="ProjectGroups" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ProjectGr__creat__73852659" Association="Self.FK__ProjectGr__creat__73852659">
+            <End Role="Session" EntitySet="Sessions" />
+            <End Role="ProjectGroup" EntitySet="ProjectGroups" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ProjectGr__super__628FA481" Association="Self.FK__ProjectGr__super__628FA481">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="ProjectGroup" EntitySet="ProjectGroups" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Recurring__meeti__1332DBDC" Association="Self.FK__Recurring__meeti__1332DBDC">
+            <End Role="SuperVisorMeeting" EntitySet="SuperVisorMeetings" />
+            <End Role="RecurringMeetingDays" EntitySet="RecurringMeetingDays" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Students__studen__662B2B3B" Association="Self.FK__Students__studen__662B2B3B">
+            <End Role="Section" EntitySet="Sections" />
+            <End Role="Students" EntitySet="Students" />
+          </AssociationSet>
+          <AssociationSet Name="FK__StudentFy__sessi__7A3223E8" Association="Self.FK__StudentFy__sessi__7A3223E8">
+            <End Role="Session" EntitySet="Sessions" />
+            <End Role="StudentFypAttempts" EntitySet="StudentFypAttempts" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Students__admiss__52593CB8" Association="Self.FK__Students__admiss__52593CB8">
+            <End Role="Session" EntitySet="Sessions" />
+            <End Role="Students" EntitySet="Students" />
+          </AssociationSet>
+          <AssociationSet Name="FK__StudentFy__stude__7D0E9093" Association="Self.FK__StudentFy__stude__7D0E9093">
+            <End Role="Students" EntitySet="Students" />
+            <End Role="StudentFypAttempts" EntitySet="StudentFypAttempts" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Students__regNum__5165187F" Association="Self.FK__Students__regNum__5165187F">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Students" EntitySet="Students" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Students__select__534D60F1" Association="Self.FK__Students__select__534D60F1">
+            <End Role="Technology" EntitySet="Technologies" />
+            <End Role="Students" EntitySet="Students" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SupNotBro__stude__19DFD96B" Association="Self.FK__SupNotBro__stude__19DFD96B">
+            <End Role="Students" EntitySet="Students" />
+            <End Role="SupNotBroadCast" EntitySet="SupNotBroadCasts" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SupTaskBr__stude__160F4887" Association="Self.FK__SupTaskBr__stude__160F4887">
+            <End Role="Students" EntitySet="Students" />
+            <End Role="SupTaskBroadCast" EntitySet="SupTaskBroadCasts" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Tasks__studentID__6C190EBB" Association="Self.FK__Tasks__studentID__6C190EBB">
+            <End Role="Students" EntitySet="Students" />
+            <End Role="Tasks" EntitySet="Tasks" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SuperViso__creat__0F624AF8" Association="Self.FK__SuperViso__creat__0F624AF8">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="SuperVisorMeeting" EntitySet="SuperVisorMeetings" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SupNotBro__meeti__1AD3FDA4" Association="Self.FK__SupNotBro__meeti__1AD3FDA4">
+            <End Role="SuperVisorMeeting" EntitySet="SuperVisorMeetings" />
+            <End Role="SupNotBroadCast" EntitySet="SupNotBroadCasts" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SupTaskBr__taskI__17036CC0" Association="Self.FK__SupTaskBr__taskI__17036CC0">
+            <End Role="Tasks" EntitySet="Tasks" />
+            <End Role="SupTaskBroadCast" EntitySet="SupTaskBroadCasts" />
+          </AssociationSet>
+          <AssociationSet Name="FK__TaskEvalu__taskI__6EF57B66" Association="Self.FK__TaskEvalu__taskI__6EF57B66">
+            <End Role="Tasks" EntitySet="Tasks" />
+            <End Role="TaskEvaluation" EntitySet="TaskEvaluations" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Tasks__assignedB__6A30C649" Association="Self.FK__Tasks__assignedB__6A30C649">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Tasks" EntitySet="Tasks" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="FypProjectProgDBModelStoreContainer" CdmEntityContainer="FypProjectProgDBEntities">
+          <EntitySetMapping Name="ComiteeMeetings">
+            <EntityTypeMapping TypeName="FypProjectProgDBModel.ComiteeMeeting">
+              <MappingFragment StoreEntitySet="ComiteeMeeting">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="meetingDescription" ColumnName="meetingDescription" />
+                <ScalarProperty Name="startDate" ColumnName="startDate" />
+                <ScalarProperty Name="endDate" ColumnName="endDate" />
+                <ScalarProperty Name="startTime" ColumnName="startTime" />
+                <ScalarProperty Name="endTime" ColumnName="endTime" />
+                <ScalarProperty Name="venue" ColumnName="venue" />
+                <ScalarProperty Name="selectedDays" ColumnName="selectedDays" />
+                <ScalarProperty Name="sessionID" ColumnName="sessionID" />
+                <ScalarProperty Name="isGraded" ColumnName="isGraded" />
+                <ScalarProperty Name="isFileRequired" ColumnName="isFileRequired" />
+                <ScalarProperty Name="title" ColumnName="title" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Departments">
+            <EntityTypeMapping TypeName="FypProjectProgDBModel.Department">
+              <MappingFragment StoreEntitySet="Department">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Enrollments">
+            <EntityTypeMapping TypeName="FypProjectProgDBModel.Enrollment">
+              <MappingFragment StoreEntitySet="Enrollment">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="studentID" ColumnName="studentID" />
+                <ScalarProperty Name="sessionID" ColumnName="sessionID" />
+                <ScalarProperty Name="subject" ColumnName="subject" />
+                <ScalarProperty Name="grade" ColumnName="grade" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FYP2Score">
+            <EntityTypeMapping TypeName="FypProjectProgDBModel.FYP2Score">
+              <MappingFragment StoreEntitySet="FYP2Score">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="evaluatorID" ColumnName="evaluatorID" />
+                <ScalarProperty Name="evaluationID" ColumnName="evaluationID" />
+                <ScalarProperty Name="sessionID" ColumnName="sessionID" />
+                <ScalarProperty Name="score" ColumnName="score" />
+                <ScalarProperty Name="groupMemberID" ColumnName="groupMemberID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Fyp2Task">
+            <EntityTypeMapping TypeName="FypProjectProgDBModel.Fyp2Task">
+              <MappingFragment StoreEntitySet="Fyp2Task">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="groupID" ColumnName="groupID" />
+                <ScalarProperty Name="sessionID" ColumnName="sessionID" />
+                <ScalarProperty Name="taskDescription" ColumnName="taskDescription" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Fyp2TaskEvaluation">
+            <EntityTypeMapping TypeName="FypProjectProgDBModel.Fyp2TaskEvaluation">
+              <MappingFragment StoreEntitySet="Fyp2TaskEvaluation">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="taskID" ColumnName="taskID" />
+                <ScalarProperty Name="evaluatorID" ColumnName="evaluatorID" />
+                <ScalarProperty Name="studentID" ColumnName="studentID" />
+                <ScalarProperty Name="remarks" ColumnName="remarks" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GroupMembers">
+            <EntityTypeMapping TypeName="FypProjectProgDBModel.GroupMember">
+              <MappingFragment StoreEntitySet="GroupMembers">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="groupID" ColumnName="groupID" />
+                <ScalarProperty Name="studentID" ColumnName="studentID" />
+                <ScalarProperty Name="isAdmin" ColumnName="isAdmin" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GroupRequestMembers">
+            <EntityTypeMapping TypeName="FypProjectProgDBModel.GroupRequestMember">
+              <MappingFragment StoreEntitySet="GroupRequestMembers">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="RequestID" ColumnName="RequestID" />
+                <ScalarProperty Name="MemberRegNum" ColumnName="MemberRegNum" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GroupRequests">
+            <EntityTypeMapping TypeName="FypProjectProgDBModel.GroupRequest">
+              <MappingFragment StoreEntitySet="GroupRequests">
+                <ScalarProperty Name="RequestID" ColumnName="RequestID" />
+                <ScalarProperty Name="FromRegNum" ColumnName="FromRegNum" />
+                <ScalarProperty Name="SessionID" ColumnName="SessionID" />
+                <ScalarProperty Name="RequestDate" ColumnName="RequestDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GroupSchedules">
+            <EntityTypeMapping TypeName="FypProjectProgDBModel.GroupSchedule">
+              <MappingFragment StoreEntitySet="GroupSchedule">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="groupID" ColumnName="groupID" />
+                <ScalarProperty Name="comiteeMeetingID" ColumnName="comiteeMeetingID" />
+                <ScalarProperty Name="filePath" ColumnName="filePath" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="estimatedTime" ColumnName="estimatedTime" />
+                <ScalarProperty Name="meetingDate" ColumnName="meetingDate" />
+                <ScalarProperty Name="isAttend" ColumnName="isAttend" />
+                <ScalarProperty Name="type" ColumnName="type" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MeetingAttendances">
+            <EntityTypeMapping TypeName="FypProjectProgDBModel.MeetingAttendance">
+              <MappingFragment StoreEntitySet="MeetingAttendance">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="scheduleID" ColumnName="scheduleID" />
+                <ScalarProperty Name="attendance" ColumnName="attendance" />
+                <ScalarProperty Name="remarks" ColumnName="remarks" />
+                <ScalarProperty Name="studentID" ColumnName="studentID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MeetingQueues">
+            <EntityTypeMapping TypeName="FypProjectProgDBModel.MeetingQueue">
+              <MappingFragment StoreEntitySet="MeetingQueue">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="meetingDate" ColumnName="meetingDate" />
+                <ScalarProperty Name="meetingTime" ColumnName="meetingTime" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="scheduleID" ColumnName="scheduleID" />
+                <ScalarProperty Name="sessionID" ColumnName="sessionID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MeetingQueueAttendances">
+            <EntityTypeMapping TypeName="FypProjectProgDBModel.MeetingQueueAttendance">
+              <MappingFragment StoreEntitySet="MeetingQueueAttendance">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="meetingQueueID" ColumnName="meetingQueueID" />
+                <ScalarProperty Name="memberID" ColumnName="memberID" />
+                <ScalarProperty Name="isPresent" ColumnName="isPresent" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OfferedProjects">
+            <EntityTypeMapping TypeName="FypProjectProgDBModel.OfferedProject">
+              <MappingFragment StoreEntitySet="OfferedProject">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="sessionID" ColumnName="sessionID" />
+                <ScalarProperty Name="projectID" ColumnName="projectID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Projects">
+            <EntityTypeMapping TypeName="FypProjectProgDBModel.Project">
+              <MappingFragment StoreEntitySet="Project">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="title" ColumnName="title" />
+                <ScalarProperty Name="suggestedBy" ColumnName="suggestedBy" />
+                <ScalarProperty Name="projectStatus" ColumnName="projectStatus" />
+                <ScalarProperty Name="objectives" ColumnName="objectives" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProjectGroups">
+            <EntityTypeMapping TypeName="FypProjectProgDBModel.ProjectGroup">
+              <MappingFragment StoreEntitySet="ProjectGroup">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="createdBy" ColumnName="createdBy" />
+                <ScalarProperty Name="supervisorID" ColumnName="supervisorID" />
+                <ScalarProperty Name="projectID" ColumnName="projectID" />
+                <ScalarProperty Name="isFinalized" ColumnName="isFinalized" />
+                <ScalarProperty Name="createdSession" ColumnName="createdSession" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RecurringMeetingDays">
+            <EntityTypeMapping TypeName="FypProjectProgDBModel.RecurringMeetingDay">
+              <MappingFragment StoreEntitySet="RecurringMeetingDays">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="meetingID" ColumnName="meetingID" />
+                <ScalarProperty Name="meetingDay" ColumnName="meetingDay" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Sections">
+            <EntityTypeMapping TypeName="FypProjectProgDBModel.Section">
+              <MappingFragment StoreEntitySet="Section">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Sessions">
+            <EntityTypeMapping TypeName="FypProjectProgDBModel.Session">
+              <MappingFragment StoreEntitySet="Session">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="startDate" ColumnName="startDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="StudentFypAttempts">
+            <EntityTypeMapping TypeName="FypProjectProgDBModel.StudentFypAttempt">
+              <MappingFragment StoreEntitySet="StudentFypAttempts">
+                <ScalarProperty Name="attemptId" ColumnName="attemptId" />
+                <ScalarProperty Name="studentId" ColumnName="studentId" />
+                <ScalarProperty Name="sessionId" ColumnName="sessionId" />
+                <ScalarProperty Name="groupId" ColumnName="groupId" />
+                <ScalarProperty Name="fypType" ColumnName="fypType" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="createdAt" ColumnName="createdAt" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Students">
+            <EntityTypeMapping TypeName="FypProjectProgDBModel.Student">
+              <MappingFragment StoreEntitySet="Students">
+                <ScalarProperty Name="regNum" ColumnName="regNum" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="admissionSession" ColumnName="admissionSession" />
+                <ScalarProperty Name="currentCGPA" ColumnName="currentCGPA" />
+                <ScalarProperty Name="gender" ColumnName="gender" />
+                <ScalarProperty Name="selectedTech" ColumnName="selectedTech" />
+                <ScalarProperty Name="studentDepartment" ColumnName="studentDepartment" />
+                <ScalarProperty Name="studentSection" ColumnName="studentSection" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SuperVisorMeetings">
+            <EntityTypeMapping TypeName="FypProjectProgDBModel.SuperVisorMeeting">
+              <MappingFragment StoreEntitySet="SuperVisorMeeting">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="date" ColumnName="date" />
+                <ScalarProperty Name="time" ColumnName="time" />
+                <ScalarProperty Name="day" ColumnName="day" />
+                <ScalarProperty Name="venue" ColumnName="venue" />
+                <ScalarProperty Name="createdBy" ColumnName="createdBy" />
+                <ScalarProperty Name="groupID" ColumnName="groupID" />
+                <ScalarProperty Name="isRecurring" ColumnName="isRecurring" />
+                <ScalarProperty Name="memberId" ColumnName="memberId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SupNotBroadCasts">
+            <EntityTypeMapping TypeName="FypProjectProgDBModel.SupNotBroadCast">
+              <MappingFragment StoreEntitySet="SupNotBroadCast">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="studentID" ColumnName="studentID" />
+                <ScalarProperty Name="meetingID" ColumnName="meetingID" />
+                <ScalarProperty Name="notStatus" ColumnName="notStatus" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SupTaskBroadCasts">
+            <EntityTypeMapping TypeName="FypProjectProgDBModel.SupTaskBroadCast">
+              <MappingFragment StoreEntitySet="SupTaskBroadCast">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="studentID" ColumnName="studentID" />
+                <ScalarProperty Name="taskID" ColumnName="taskID" />
+                <ScalarProperty Name="notStatus" ColumnName="notStatus" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="FypProjectProgDBModel.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TaskEvaluations">
+            <EntityTypeMapping TypeName="FypProjectProgDBModel.TaskEvaluation">
+              <MappingFragment StoreEntitySet="TaskEvaluation">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="taskID" ColumnName="taskID" />
+                <ScalarProperty Name="taskRemarks" ColumnName="taskRemarks" />
+                <ScalarProperty Name="submissionFilePath" ColumnName="submissionFilePath" />
+                <ScalarProperty Name="submissionDate" ColumnName="submissionDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tasks">
+            <EntityTypeMapping TypeName="FypProjectProgDBModel.Task">
+              <MappingFragment StoreEntitySet="Tasks">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="title" ColumnName="title" />
+                <ScalarProperty Name="taskDescription" ColumnName="taskDescription" />
+                <ScalarProperty Name="assignDate" ColumnName="assignDate" />
+                <ScalarProperty Name="dueDate" ColumnName="dueDate" />
+                <ScalarProperty Name="assignedBy" ColumnName="assignedBy" />
+                <ScalarProperty Name="groupID" ColumnName="groupID" />
+                <ScalarProperty Name="studentID" ColumnName="studentID" />
+                <ScalarProperty Name="isPptRequired" ColumnName="isPptRequired" />
+                <ScalarProperty Name="taskStatus" ColumnName="taskStatus" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Technologies">
+            <EntityTypeMapping TypeName="FypProjectProgDBModel.Technology">
+              <MappingFragment StoreEntitySet="Technology">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="FypProjectProgDBModel.User">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="role" ColumnName="role" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Fyp1EvaluationParameters">
+            <EntityTypeMapping TypeName="FypProjectProgDBModel.Fyp1EvaluationParameters">
+              <MappingFragment StoreEntitySet="Fyp1EvaluationParameters">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="percentage" ColumnName="percentage" />
+                <ScalarProperty Name="sessionID" ColumnName="sessionID" />
+                <ScalarProperty Name="allowEvaluation" ColumnName="allowEvaluation" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Fyp1ParameterEvaluator">
+            <EntityTypeMapping TypeName="FypProjectProgDBModel.Fyp1ParameterEvaluator">
+              <MappingFragment StoreEntitySet="Fyp1ParameterEvaluator">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="parameterID" ColumnName="parameterID" />
+                <ScalarProperty Name="evaluatorID" ColumnName="evaluatorID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Fyp1SubParameter">
+            <EntityTypeMapping TypeName="FypProjectProgDBModel.Fyp1SubParameter">
+              <MappingFragment StoreEntitySet="Fyp1SubParameter">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="parameterID" ColumnName="parameterID" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="percentage" ColumnName="percentage" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SemesterAgendas">
+            <EntityTypeMapping TypeName="FypProjectProgDBModel.SemesterAgenda">
+              <MappingFragment StoreEntitySet="SemesterAgenda">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="program" ColumnName="program" />
+                <ScalarProperty Name="title" ColumnName="title" />
+                <ScalarProperty Name="agendaDate" ColumnName="agendaDate" />
+                <ScalarProperty Name="agendaTime" ColumnName="agendaTime" />
+                <ScalarProperty Name="location" ColumnName="location" />
+                <ScalarProperty Name="sessionID" ColumnName="sessionID" />
+                <ScalarProperty Name="createdAt" ColumnName="createdAt" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SupervisorAttendances">
+            <EntityTypeMapping TypeName="FypProjectProgDBModel.SupervisorAttendance">
+              <MappingFragment StoreEntitySet="SupervisorAttendance">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="meetingID" ColumnName="meetingID" />
+                <ScalarProperty Name="memberID" ColumnName="memberID" />
+                <ScalarProperty Name="attendanceDate" ColumnName="attendanceDate" />
+                <ScalarProperty Name="isAttend" ColumnName="isAttend" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TaskAllocations">
+            <EntityTypeMapping TypeName="FypProjectProgDBModel.TaskAllocation">
+              <MappingFragment StoreEntitySet="TaskAllocation">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="groupID" ColumnName="groupID" />
+                <ScalarProperty Name="meetingID" ColumnName="meetingID" />
+                <ScalarProperty Name="taskType" ColumnName="taskType" />
+                <ScalarProperty Name="taskDescription" ColumnName="taskDescription" />
+                <ScalarProperty Name="remarks" ColumnName="remarks" />
+                <ScalarProperty Name="assignedDate" ColumnName="assignedDate" />
+                <ScalarProperty Name="sessionID" ColumnName="sessionID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

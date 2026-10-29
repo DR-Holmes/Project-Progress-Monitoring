@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="a86266452262449993f3597022394c24" Name="Diagram1">
+        <EntityTypeShape EntityType="FypProjectProgDBModel.ComiteeMeeting" Width="1.5" PointX="3" PointY="17.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="FypProjectProgDBModel.Department" Width="1.5" PointX="7.75" PointY="11.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="FypProjectProgDBModel.Enrollment" Width="1.5" PointX="3" PointY="22.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="FypProjectProgDBModel.FYP2Score" Width="1.5" PointX="8" PointY="14.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="FypProjectProgDBModel.Fyp2Task" Width="1.5" PointX="3" PointY="29" IsExpanded="true" />
+        <EntityTypeShape EntityType="FypProjectProgDBModel.Fyp2TaskEvaluation" Width="1.5" PointX="5.25" PointY="28.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="FypProjectProgDBModel.GroupMember" Width="1.5" PointX="15.25" PointY="23.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="FypProjectProgDBModel.GroupRequestMember" Width="1.5" PointX="12.25" PointY="17.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="FypProjectProgDBModel.GroupRequest" Width="1.5" PointX="3" PointY="13.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="FypProjectProgDBModel.GroupSchedule" Width="1.5" PointX="5.25" PointY="17.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="FypProjectProgDBModel.MeetingAttendance" Width="1.5" PointX="7.5" PointY="18.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="FypProjectProgDBModel.MeetingQueue" Width="1.5" PointX="7.5" PointY="22" IsExpanded="true" />
+        <EntityTypeShape EntityType="FypProjectProgDBModel.MeetingQueueAttendance" Width="1.5" PointX="10.75" PointY="25.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="FypProjectProgDBModel.OfferedProject" Width="1.5" PointX="3" PointY="26" IsExpanded="true" />
+        <EntityTypeShape EntityType="FypProjectProgDBModel.Project" Width="1.5" PointX="0.75" PointY="25.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="FypProjectProgDBModel.ProjectGroup" Width="1.5" PointX="5.25" PointY="22.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="FypProjectProgDBModel.RecurringMeetingDay" Width="1.5" PointX="12.25" PointY="30.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="FypProjectProgDBModel.Section" Width="1.5" PointX="7.75" PointY="9.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="FypProjectProgDBModel.Session" Width="1.5" PointX="0.75" PointY="19.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="FypProjectProgDBModel.StudentFypAttempt" Width="1.5" PointX="8" PointY="25.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="FypProjectProgDBModel.Student" Width="1.5" PointX="10" PointY="18.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="FypProjectProgDBModel.SuperVisorMeeting" Width="1.5" PointX="10" PointY="29.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="FypProjectProgDBModel.SupNotBroadCast" Width="1.5" PointX="12.25" PointY="21" IsExpanded="true" />
+        <EntityTypeShape EntityType="FypProjectProgDBModel.SupTaskBroadCast" Width="1.5" PointX="15.25" PointY="20" IsExpanded="true" />
+        <EntityTypeShape EntityType="FypProjectProgDBModel.sysdiagram" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="FypProjectProgDBModel.TaskEvaluation" Width="1.5" PointX="17.5" PointY="16" IsExpanded="true" />
+        <EntityTypeShape EntityType="FypProjectProgDBModel.Task" Width="1.5" PointX="15.25" PointY="15.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="FypProjectProgDBModel.Technology" Width="1.5" PointX="7.75" PointY="29.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="FypProjectProgDBModel.User" Width="1.5" PointX="7.75" PointY="31.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="FypProjectProgDBModel.Fyp1EvaluationParameters" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="FypProjectProgDBModel.Fyp1ParameterEvaluator" Width="1.5" PointX="0.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="FypProjectProgDBModel.Fyp1SubParameter" Width="1.5" PointX="2.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="FypProjectProgDBModel.SemesterAgenda" Width="1.5" PointX="4.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="FypProjectProgDBModel.SupervisorAttendance" Width="1.5" PointX="4.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="FypProjectProgDBModel.TaskAllocation" Width="1.5" PointX="6.75" PointY="0.75" IsExpanded="true" />
+        <AssociationConnector Association="FypProjectProgDBModel.FK__ComiteeMe__sessi__1DB06A4F" ManuallyRouted="false" />
+        <AssociationConnector Association="FypProjectProgDBModel.FK__GroupSche__comit__22751F6C" ManuallyRouted="false" />
+        <AssociationConnector Association="FypProjectProgDBModel.FK__Students__studen__5441852A" ManuallyRouted="false" />
+        <AssociationConnector Association="FypProjectProgDBModel.FK__Enrollmen__sessi__5812160E" ManuallyRouted="false" />
+        <AssociationConnector Association="FypProjectProgDBModel.FK__Enrollmen__stude__571DF1D5" ManuallyRouted="false" />
+        <AssociationConnector Association="FypProjectProgDBModel.FK__FYP2Score__evalu__7A672E12" ManuallyRouted="false" />
+        <AssociationConnector Association="FypProjectProgDBModel.FK__FYP2Score__evalu__7B5B524B" ManuallyRouted="false" />
+        <AssociationConnector Association="FypProjectProgDBModel.FK__FYP2Score__group__7D439ABD" ManuallyRouted="false" />
+        <AssociationConnector Association="FypProjectProgDBModel.FK__FYP2Score__sessi__7C4F7684" ManuallyRouted="false" />
+        <AssociationConnector Association="FypProjectProgDBModel.FK__Fyp2Task__sessio__72C60C4A" ManuallyRouted="false" />
+        <AssociationConnector Association="FypProjectProgDBModel.FK__Fyp2TaskE__taskI__75A278F5" ManuallyRouted="false" />
+        <AssociationConnector Association="FypProjectProgDBModel.FK__Fyp2TaskE__evalu__76969D2E" ManuallyRouted="false" />
+        <AssociationConnector Association="FypProjectProgDBModel.FK__Fyp2TaskE__stude__778AC167" ManuallyRouted="false" />
+        <AssociationConnector Association="FypProjectProgDBModel.FK__GroupMemb__group__66603565" ManuallyRouted="false" />
+        <AssociationConnector Association="FypProjectProgDBModel.FK__GroupMemb__stude__6754599E" ManuallyRouted="false" />
+        <AssociationConnector Association="FypProjectProgDBModel.FK__MeetingQu__membe__30C33EC3" ManuallyRouted="false" />
+        <AssociationConnector Association="FypProjectProgDBModel.FK__GroupRequ__Membe__55009F39" ManuallyRouted="false" />
+        <AssociationConnector Association="FypProjectProgDBModel.FK__GroupRequ__Reque__55F4C372" ManuallyRouted="false" />
+        <AssociationConnector Association="FypProjectProgDBModel.FK__GroupRequ__FromR__4F47C5E3" ManuallyRouted="false" />
+        <AssociationConnector Association="FypProjectProgDBModel.FK__GroupRequ__Sessi__503BEA1C" ManuallyRouted="false" />
+        <AssociationConnector Association="FypProjectProgDBModel.FK__MeetingAt__sched__25518C17" ManuallyRouted="false" />
+        <AssociationConnector Association="FypProjectProgDBModel.FK__MeetingQu__sched__2BFE89A6" ManuallyRouted="false" />
+        <AssociationConnector Association="FypProjectProgDBModel.FK__MeetingQu__meeti__2FCF1A8A" ManuallyRouted="false" />
+        <AssociationConnector Association="FypProjectProgDBModel.FK__MeetingQu__sessi__2CF2ADDF" ManuallyRouted="false" />
+        <AssociationConnector Association="FypProjectProgDBModel.FK__OfferedPr__proje__5EBF139D" ManuallyRouted="false" />
+        <AssociationConnector Association="FypProjectProgDBModel.FK__OfferedPr__sessi__5DCAEF64" ManuallyRouted="false" />
+        <AssociationConnector Association="FypProjectProgDBModel.FK__ProjectGr__proje__6383C8BA" ManuallyRouted="false" />
+        <AssociationConnector Association="FypProjectProgDBModel.FK__Project__suggest__5AEE82B9" ManuallyRouted="false" />
+        <AssociationConnector Association="FypProjectProgDBModel.FK__ProjectGr__creat__619B8048" ManuallyRouted="false" />
+        <AssociationConnector Association="FypProjectProgDBModel.FK__ProjectGr__creat__73852659" ManuallyRouted="false" />
+        <AssociationConnector Association="FypProjectProgDBModel.FK__ProjectGr__super__628FA481" ManuallyRouted="false" />
+        <AssociationConnector Association="FypProjectProgDBModel.FK__Recurring__meeti__1332DBDC" ManuallyRouted="false" />
+        <AssociationConnector Association="FypProjectProgDBModel.FK__Students__studen__662B2B3B" ManuallyRouted="false" />
+        <AssociationConnector Association="FypProjectProgDBModel.FK__StudentFy__sessi__7A3223E8" ManuallyRouted="false" />
+        <AssociationConnector Association="FypProjectProgDBModel.FK__Students__admiss__52593CB8" ManuallyRouted="false" />
+        <AssociationConnector Association="FypProjectProgDBModel.FK__StudentFy__stude__7D0E9093" ManuallyRouted="false" />
+        <AssociationConnector Association="FypProjectProgDBModel.FK__Students__regNum__5165187F" ManuallyRouted="false" />
+        <AssociationConnector Association="FypProjectProgDBModel.FK__Students__select__534D60F1" ManuallyRouted="false" />
+        <AssociationConnector Association="FypProjectProgDBModel.FK__SupNotBro__stude__19DFD96B" ManuallyRouted="false" />
+        <AssociationConnector Association="FypProjectProgDBModel.FK__SupTaskBr__stude__160F4887" ManuallyRouted="false" />
+        <AssociationConnector Association="FypProjectProgDBModel.FK__Tasks__studentID__6C190EBB" ManuallyRouted="false" />
+        <AssociationConnector Association="FypProjectProgDBModel.FK__SuperViso__creat__0F624AF8" ManuallyRouted="false" />
+        <AssociationConnector Association="FypProjectProgDBModel.FK__SupNotBro__meeti__1AD3FDA4" ManuallyRouted="false" />
+        <AssociationConnector Association="FypProjectProgDBModel.FK__SupTaskBr__taskI__17036CC0" ManuallyRouted="false" />
+        <AssociationConnector Association="FypProjectProgDBModel.FK__TaskEvalu__taskI__6EF57B66" ManuallyRouted="false" />
+        <AssociationConnector Association="FypProjectProgDBModel.FK__Tasks__assignedB__6A30C649" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

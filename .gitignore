@@ -1,0 +1,38 @@
+# Visual Studio / .NET
+.vs/
+bin/
+obj/
+packages/
+*.user
+*.suo
+*.mdf
+*.ldf
+*.log
+Web.*.config.user
+
+# Runtime uploads (keep folders only)
+ProgressMonitoringProject/ProgressMonitoringProject/Uploads/**
+!ProgressMonitoringProject/ProgressMonitoringProject/Uploads/**/
+!ProgressMonitoringProject/ProgressMonitoringProject/Uploads/**/.gitkeep
+
+# Flutter / Dart
+.dart_tool/
+.flutter-plugins
+.flutter-plugins-dependencies
+.packages
+build/
+pubspec.lock
+local.properties
+key.properties
+*.jks
+*.keystore
+google-services.json
+GoogleService-Info.plist
+
+# IDE / OS
+.idea/
+*.iml
+.vscode/
+.DS_Store
+Thumbs.db
+.env
